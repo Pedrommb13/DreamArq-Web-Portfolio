@@ -122,10 +122,18 @@ nav {
 }
 
 .logo {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+    transition: var(--transition);
+}
+
+.logo a:hover img {
+    transform: scale(1.05);
 }
 
 .nav-links {
@@ -175,15 +183,52 @@ nav {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/hero-bg.jpg');
+    position: relative;
+    color: var(--text-light);
+    overflow: hidden;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
-    color: var(--text-light);
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.hero-bg-1 {
+    background-image: url('../images/hero-bg-1.png');
+    opacity: 1;
+}
+
+.hero-bg-2 {
+    background-image: url('../images/hero-bg-2.png');
+}
+
+.hero-bg-3 {
+    background-image: url('../images/hero-bg-3.png');
 }
 
 .hero-content {
     max-width: 800px;
     padding: 0 20px;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content h1 {
@@ -216,7 +261,6 @@ nav {
     left: 20px;
     width: 100%;
     height: 100%;
-    border: 5px solid var(--secondary-color);
     z-index: -1;
 }
 
@@ -502,6 +546,10 @@ footer {
     .burger {
         display: block;
     }
+    
+    .logo img {
+        height: 40px;
+    }
 
     .about-content, .contact-content {
         grid-template-columns: 1fr;
@@ -523,6 +571,14 @@ footer {
 @media screen and (max-width: 480px) {
     .nav-links {
         width: 100%;
+    }
+    
+    .logo img {
+        height: 35px;
+    }
+    
+    nav {
+        padding: 0 20px;
     }
 
     .projects-grid, .services-grid {

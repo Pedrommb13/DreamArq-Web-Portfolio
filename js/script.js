@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Hero background image cycling
+    const heroBgs = document.querySelectorAll('.hero-background');
+    let currentBgIndex = 0;
+    
+    function cycleBackgrounds() {
+        // Hide all backgrounds
+        heroBgs.forEach((bg, index) => {
+            bg.style.opacity = 0;
+        });
+        
+        // Show the next background
+        currentBgIndex = (currentBgIndex + 1) % heroBgs.length;
+        heroBgs[currentBgIndex].style.opacity = 1;
+        
+        // Call again after delay
+        setTimeout(cycleBackgrounds, 5000); // Change image every 5 seconds
+    }
+    
+    // Start the cycling after a delay
+    setTimeout(cycleBackgrounds, 5000);
+    
     // Navigation menu toggle for mobile
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
@@ -50,9 +71,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Project filtering functionality
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projects = document.querySelectorAll('.project-card');
+    
+    // Show projects function
+    function showProject(project) {
+        project.style.display = 'block';
+        window.setTimeout(function() {
+            project.style.opacity = '1';
+            project.style.transform = 'scale(1)';
+        }, 100);
+    }
+    
+    // Hide projects function
+    function hideProject(project) {
+        project.style.opacity = '0';
+        project.style.transform = 'scale(0.8)';
+        window.setTimeout(function() {
+            project.style.display = 'none';
+        }, 300);
+    }
 
     filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', function() {
             // Remove active class from all buttons
             filterButtons.forEach(btn => btn.classList.remove('active'));
             
@@ -62,19 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const filterValue = button.getAttribute('data-filter');
             
             // Show/hide projects based on filter
-            projects.forEach(project => {
+            projects.forEach(function(project) {
                 if (filterValue === 'all' || project.getAttribute('data-category') === filterValue) {
-                    project.style.display = 'block';
-                    setTimeout(() => {
-                        project.style.opacity = '1';
-                        project.style.transform = 'scale(1)';
-                    }, 100);
+                    showProject(project);
                 } else {
-                    project.style.opacity = '0';
-                    project.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        project.style.display = 'none';
-                    }, 300);
+                    hideProject(project);
                 }
             });
         });
