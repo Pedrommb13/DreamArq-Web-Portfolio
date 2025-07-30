@@ -1,20 +1,20 @@
 {
-  "name": "Breeze",
-  "short_description": "Luxurious coastal residence with panoramic ocean views",
-  "description": "Breeze is a residential project that embraces its coastal location with an architecture that blurs the lines between indoor and outdoor living. Floor-to-ceiling windows capture breathtaking ocean views, while the design incorporates natural ventilation to bring the refreshing sea breeze throughout the home. Sustainable materials and energy-efficient features make this luxury residence environmentally conscious.",
+  "name": "Moradia Breeze",
+  "short_description": "Elegância em dois pisos, onde o exterior se funde com o interior. Com 4 quartos e áreas comuns amplas, esta moradia impressiona pelos vãos compridos que estendem a casa até ao jardim. No piso superior, zonas privativas garantem conforto e tranquilidade. No topo, um rooftop com jardim, terraço coberto, churrasqueira e WC de apoio à piscina completam esta experiência de viver com sofisticação.",
+  "description": "Elegância em dois pisos, onde o exterior se funde com o interior. Com 4 quartos e áreas comuns amplas, esta moradia impressiona pelos vãos compridos que estendem a casa até ao jardim. No piso superior, zonas privativas garantem conforto e tranquilidade. No topo, um rooftop com jardim, terraço coberto, churrasqueira e WC de apoio à piscina completam esta experiência de viver com sofisticação. #arquitetura #architecturelovers #revit #Twinmotion #3d #house #casanova #project #projeto",
   "category": "residential",
   "thumbnail": "Image1.png",
   "images": [
     {
-      "path": "exterior.jpg",
+      "path": "Image2.png",
       "caption": "Exterior view from the beach"
     },
     {
-      "path": "terrace.jpg",
+      "path": "Image3.png",
       "caption": "Infinity pool and terrace"
     },
     {
-      "path": "interior.jpg",
+      "path": "Image4.png",
       "caption": "Open-concept living area"
     }
   ],
