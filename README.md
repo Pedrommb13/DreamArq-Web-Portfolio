@@ -1,40 +1,43 @@
 # DreamArq Architecture Portfolio Website
 
-A modern, responsive architecture portfolio website built with HTML, CSS, and JavaScript. This website is designed to showcase architectural projects and services in an elegant and professional manner.
+Um moderno e responsivo site de portfólio de arquitetura construído com HTML, CSS e JavaScript. Este site foi projetado para mostrar projetos e serviços de arquitetura de forma elegante e profissional.
 
-## Features
+## Funcionalidades
 
-- Responsive design that works on all devices
-- Modern and clean user interface
-- **Dynamic project loading from directory structure**
-- **Automatic generation of project pages**
-- Project filtering by category
-- Contact form
-- Smooth scrolling navigation
-- Animations on scroll
-- Mobile-friendly navigation
-- Hero background image cycling
+- Design responsivo que funciona em todos os dispositivos
+- Interface de usuário moderna e limpa
+- **Carregamento dinâmico de projetos a partir da estrutura de diretórios**
+- **Geração automática de páginas de projetos**
+- Filtragem de projetos por categoria
+- Formulário de contato
+- Navegação com rolagem suave
+- Animações ao rolar
+- Navegação amigável para dispositivos móveis
+- Ciclo de imagens de fundo no hero
+- **Compatibilidade com GitHub Pages**
 
-## Getting Started
+## Primeiros Passos
 
-### Prerequisites
+### Pré-requisitos
 
-- A GitHub account
-- Basic knowledge of HTML, CSS, and JavaScript (for customization)
+- Uma conta no GitHub
+- Conhecimento básico de HTML, CSS e JavaScript (para personalização)
+- Node.js (para geração de páginas de projetos)
 
-### Setup for GitHub Pages
+### Configuração para GitHub Pages
 
-1. Clone this repository or use it as a template
-2. Upload your own architecture project images to the `images` folder
-3. Update the content in `index.html` to reflect your own projects and information
-4. Commit and push your changes to GitHub
-5. Enable GitHub Pages in your repository settings:
-   - Go to your repository on GitHub
-   - Click on "Settings"
-   - Scroll down to the "GitHub Pages" section
-   - Select the branch you want to publish (usually `main`)
-   - Save your changes
-6. Your site will be published at `https://[your-username].github.io/[repository-name]`
+1. Clone este repositório ou use-o como modelo
+2. Faça o upload de suas próprias imagens de projetos de arquitetura para os diretórios de projetos
+3. Atualize o conteúdo em `index.html` para refletir seus próprios projetos e informações
+4. Execute o script de geração de páginas de projetos: `node generate-project-pages.js`
+5. Faça commit e push de suas alterações para o GitHub
+6. Ative o GitHub Pages nas configurações do seu repositório:
+   - Vá para seu repositório no GitHub
+   - Clique em "Settings"
+   - Role para baixo até a seção "GitHub Pages"
+   - Selecione o branch que deseja publicar (geralmente `main`)
+   - Salve suas alterações
+7. Seu site será publicado em `https://[seu-nome-de-usuário].github.io/[nome-do-repositório]`
 
 ## Customization Guide
 
@@ -153,27 +156,37 @@ DreamArq-Web-Portfolio/
 └── index.html
 ```
 
-## Implementation Notes
+## Notas de Implementação
 
-### Image Placeholders
+### Compatibilidade com GitHub Pages
 
-Currently, the website uses placeholder references for images. You need to:
+O site foi configurado para funcionar tanto em desenvolvimento local quanto quando hospedado no GitHub Pages:
 
-1. Add actual images to the `images` folder
-2. Update the image paths in `index.html` to point to your actual images
+1. A detecção automática do ambiente (local vs GitHub Pages) foi implementada
+2. As URLs de imagens e outros recursos são ajustadas automaticamente
 
-### Form Handling
+### Tratamento de Formulários
 
-The contact form and newsletter subscription currently only show a success message but don't actually send data. To implement actual form submission:
+O formulário de contato e inscrição na newsletter atualmente apenas mostram uma mensagem de sucesso, mas não enviam dados realmente. Para implementar o envio real de formulários:
 
-1. Set up a form handling service like Formspree, Netlify Forms, or your own backend
-2. Update the form submission code in `script.js`
+1. Configure um serviço de tratamento de formulários como Formspree, Netlify Forms ou seu próprio backend
+2. Atualize o código de envio de formulários em `script.js`
 
-## License
+## Desenvolvimento Local
 
-This project is open source and available under the [MIT License](LICENSE).
+Para testar o site localmente:
 
-## Acknowledgments
+1. Execute o servidor local incluído:
+   ```
+   node start-local-server.js
+   ```
+2. Acesse o site em `http://localhost:3000`
 
-- Icons by [Font Awesome](https://fontawesome.com/)
-- Fonts from [Google Fonts](https://fonts.google.com/)
+## Licença
+
+Este projeto é de código aberto e está disponível sob a [Licença MIT](LICENSE).
+
+## Agradecimentos
+
+- Ícones por [Font Awesome](https://fontawesome.com/)
+- Fontes de [Google Fonts](https://fonts.google.com/)

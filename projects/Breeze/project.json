@@ -6,6 +6,10 @@
   "thumbnail": "Image1.png",
   "images": [
     {
+      "path": "Image1.png",
+      "caption": "Breeze - Image1"
+    },
+        {
       "path": "Image2.png",
       "caption": "Exterior view from the beach"
     },
@@ -16,6 +20,46 @@
     {
       "path": "Image4.png",
       "caption": "Open-concept living area"
+    },
+    {
+      "path": "Image5.png",
+      "caption": "Breeze - Image5"
+    },
+    {
+      "path": "Image6.png",
+      "caption": "Breeze - Image6"
+    },
+    {
+      "path": "Image7.png",
+      "caption": "Breeze - Image7"
+    },
+    {
+      "path": "Image8.png",
+      "caption": "Breeze - Image8"
+    },
+    {
+      "path": "Image9.png",
+      "caption": "Breeze - Image9"
+    },
+    {
+      "path": "Image10.png",
+      "caption": "Breeze - Image10"
+    },
+    {
+      "path": "Image11.png",
+      "caption": "Breeze - Image11"
+    },
+    {
+      "path": "Image12.png",
+      "caption": "Breeze - Image12"
+    },
+    {
+      "path": "Image13.png",
+      "caption": "Breeze - Image13"
+    },
+    {
+      "path": "Image14.png",
+      "caption": "Breeze - Image14"
     }
   ],
   "details": {

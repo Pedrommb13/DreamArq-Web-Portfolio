@@ -1,25 +1,117 @@
 {
-  "name": "Moradia Fazul",
+  "name": "Moradia Fazol",
   "short_description": "Com um design moderno e apelativo, destaca-se pelo seu layout em “L”, que abraça a piscina e o pátio, criando um ambiente íntimo e acolhedor. Os 3 quartos oferecem conforto e privacidade, num espaço pensado para viver em harmonia com o exterior. #arquitetura #architecturelovers #designlovers #3d #twinmotion #revit #sketchup #casadossonhos",
   "description": "Com um design moderno e apelativo, destaca-se pelo seu layout em “L”, que abraça a piscina e o pátio, criando um ambiente íntimo e acolhedor. Os 3 quartos oferecem conforto e privacidade, num espaço pensado para viver em harmonia com o exterior. #arquitetura #architecturelovers #designlovers #3d #twinmotion #revit #sketchup #casadossonhos",
   "category": "residential",
   "thumbnail": "Capa_Fazol.jpg",
   "images": [
     {
-      "path": "Image1.png",
-      "caption": "Exterior view with mountain backdrop"
+      "path": "Capa_Fazol.jpg",
+      "caption": "Fazol - Capa_Fazol"
     },
     {
-      "path": "Image5.png",
-      "caption": "Living area with panoramic views"
+      "path": "Image1.png",
+      "caption": "Exterior view with mountain backdrop"
     },
     {
       "path": "Image10.png",
       "caption": "Outdoor entertainment space"
     },
     {
+      "path": "Image11.png",
+      "caption": "Fazol - Image11"
+    },
+    {
+      "path": "Image11A.png",
+      "caption": "Fazol - Image11A"
+    },
+    {
+      "path": "Image12.png",
+      "caption": "Fazol - Image12"
+    },
+    {
+      "path": "Image13.png",
+      "caption": "Fazol - Image13"
+    },
+    {
+      "path": "Image13A.png",
+      "caption": "Fazol - Image13A"
+    },
+    {
+      "path": "Image14.png",
+      "caption": "Fazol - Image14"
+    },
+    {
+      "path": "Image14A.png",
+      "caption": "Fazol - Image14A"
+    },
+    {
       "path": "Image15.png",
       "caption": "Integrated kitchen and dining area"
+    },
+    {
+      "path": "Image16.png",
+      "caption": "Fazol - Image16"
+    },
+    {
+      "path": "Image16A.png",
+      "caption": "Fazol - Image16A"
+    },
+    {
+      "path": "Image1A.png",
+      "caption": "Fazol - Image1A"
+    },
+    {
+      "path": "Image2.png",
+      "caption": "Fazol - Image2"
+    },
+    {
+      "path": "Image2A.png",
+      "caption": "Fazol - Image2A"
+    },
+    {
+      "path": "Image3.png",
+      "caption": "Fazol - Image3"
+    },
+    {
+      "path": "Image3A.png",
+      "caption": "Fazol - Image3A"
+    },
+    {
+      "path": "Image4.png",
+      "caption": "Fazol - Image4"
+    },
+    {
+      "path": "Image4A.png",
+      "caption": "Fazol - Image4A"
+    },
+    {
+      "path": "Image5.png",
+      "caption": "Living area with panoramic views"
+    },
+    {
+      "path": "Image5A.png",
+      "caption": "Fazol - Image5A"
+    },
+    {
+      "path": "Image6.png",
+      "caption": "Fazol - Image6"
+    },
+    {
+      "path": "Image7.png",
+      "caption": "Fazol - Image7"
+    },
+    {
+      "path": "Image7A.png",
+      "caption": "Fazol - Image7A"
+    },
+    {
+      "path": "Image8.png",
+      "caption": "Fazol - Image8"
+    },
+    {
+      "path": "Image9.png",
+      "caption": "Fazol - Image9"
     }
   ],
   "details": {

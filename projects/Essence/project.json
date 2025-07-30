@@ -6,16 +6,76 @@
   "thumbnail": "Image1.png",
   "images": [
     {
-      "path": "entrance.jpg",
-      "caption": "Main entrance and façade"
+      "path": "Image1.png",
+      "caption": "Vista frontal"
     },
     {
-      "path": "workspace.jpg",
-      "caption": "Open workspace concept"
+      "path": "Image10.png",
+      "caption": "Essence - Image10"
     },
     {
-      "path": "meeting.jpg",
-      "caption": "Collaborative meeting spaces"
+      "path": "Image11.png",
+      "caption": "Essence - Image11"
+    },
+    {
+      "path": "Image12.png",
+      "caption": "Essence - Image12"
+    },
+    {
+      "path": "Image13.png",
+      "caption": "Essence - Image13"
+    },
+    {
+      "path": "Image14.png",
+      "caption": "Essence - Image14"
+    },
+    {
+      "path": "Image15.png",
+      "caption": "Essence - Image15"
+    },
+    {
+      "path": "Image16.png",
+      "caption": "Essence - Image16"
+    },
+    {
+      "path": "Image17.png",
+      "caption": "Essence - Image17"
+    },
+    {
+      "path": "Image18.png",
+      "caption": "Essence - Image18"
+    },
+    {
+      "path": "Image2.png",
+      "caption": "Detalhe da fachada"
+    },
+    {
+      "path": "Image3.png",
+      "caption": "Vista do jardim interno"
+    },
+    {
+      "path": "Image4.png",
+      "caption": "Sala de estar"
+    },
+    {
+      "path": "Image5.png",
+      "caption": "Cozinha integrada"
+    },
+    {
+      "path": "Image6.png",
+      "caption": "Essence - Image6"
+    },
+    {
+      "path": "Image7.png",
+      "caption": "Essence - Image7"
+    },
+    {
+      "path": "Image8.png",
+      "caption": "Essence - Image8"
+    },
+    {
+      "path": "Image9.png",
+      "caption": "Essence - Image9"
     }
   ],
   "details": {

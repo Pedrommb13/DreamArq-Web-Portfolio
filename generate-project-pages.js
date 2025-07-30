@@ -13,7 +13,8 @@ function generateProjectPage(projectDir, projectData) {
   // Replace placeholders with actual data
   let pageContent = template
     .replace(/Project Name/g, projectData.name)
-    .replace(/data-full-src="\/projects\/\${projectDir}\/\${image.path}"/g, (match) => {
+    // Keep template literals intact
+    .replace(/data-full-src="\${baseUrl}\/projects\/\${projectDir}\/\${image.path}"/g, (match) => {
       // This is just to prevent template literals in the template from being processed here
       return match;
     })

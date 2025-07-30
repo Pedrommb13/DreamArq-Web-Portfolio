@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELO - DreamArq Portfolio</title>
+    <title>Moradia ELO - DreamArq Portfolio</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/project-detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,15 +12,15 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="../../index.html">
+                <a href="../..">
                     <img src="../../images/logo_black_letters.png" alt="DreamArq Logo">
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="../../index.html#about">Quem Somos</a></li>
-                <li><a href="../../index.html#projects">Projetos</a></li>
-                <li><a href="../../index.html#services">Serviços</a></li>
-                <li><a href="../../index.html#contact">Contato</a></li>
+                <li><a href="../../#about">Quem Somos</a></li>
+                <li><a href="../../#projects">Projetos</a></li>
+                <li><a href="../../#services">Serviços</a></li>
+                <li><a href="../../#contact">Contato</a></li>
             </ul>
             <div class="burger">
                 <div class="line1"></div>
@@ -33,7 +33,7 @@
     <main class="project-detail">
         <div class="container">
             <div class="back-link">
-                <a href="../../index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                <a href="../../#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
             </div>
             
             <div id="project-content">
@@ -52,10 +52,10 @@
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="../../index.html#about">About</a></li>
-                        <li><a href="../../index.html#projects">Projects</a></li>
-                        <li><a href="../../index.html#services">Services</a></li>
-                        <li><a href="../../index.html#contact">Contact</a></li>
+                        <li><a href="../../#about">About</a></li>
+                        <li><a href="../../#projects">Projects</a></li>
+                        <li><a href="../../#services">Services</a></li>
+                        <li><a href="../../#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
@@ -89,8 +89,11 @@
                 return;
             }
             
+            // Get base URL for GitHub Pages compatibility
+            const baseUrl = getBaseUrl();
+            
             // Load project data from JSON file
-            fetch(`/projects/${projectDir}/project.json`)
+            fetch(`${baseUrl}/projects/${projectDir}/project.json`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Project data not found');
@@ -110,6 +113,8 @@
         
         function displayProjectDetails(projectDir, data) {
             const projectContent = document.getElementById('project-content');
+            // Make sure baseUrl is accessible within this function
+            const baseUrl = getBaseUrl();
             
             // Create HTML content for project details
             let html = `
@@ -118,14 +123,14 @@
                 
                 <div class="project-gallery">
                     <div class="gallery-main">
-                        <img src="/projects/${projectDir}/${data.images[0].path}" alt="${data.images[0].caption}">
+                        <img src="${baseUrl}/projects/${projectDir}/${data.images[0].path}" alt="${data.images[0].caption}">
                     </div>
                     
                     <div class="gallery-thumbnails">
                         ${data.images.map((image, index) => `
                             <div class="thumbnail${index === 0 ? ' active' : ''}">
-                                <img src="/projects/${projectDir}/${image.path}" alt="${image.caption}"
-                                    data-full-src="/projects/${projectDir}/${image.path}"
+                                <img src="${baseUrl}/projects/${projectDir}/${image.path}" alt="${image.caption}"
+                                    data-full-src="${baseUrl}/projects/${projectDir}/${image.path}"
                                     data-caption="${image.caption}">
                             </div>
                         `).join('')}
@@ -180,13 +185,29 @@
         
         function showError(message) {
             const projectContent = document.getElementById('project-content');
+            const baseUrl = getBaseUrl();
             projectContent.innerHTML = `
                 <div class="error-message">
                     <i class="fas fa-exclamation-triangle"></i>
                     <p>${message}</p>
-                    <a href="../../index.html#projects" class="btn-small">Back to Projects</a>
+                    <a href="${baseUrl}/index.html#projects" class="btn-small">Back to Projects</a>
                 </div>
             `;
+        }
+        
+        // Function to determine the base URL (for GitHub Pages compatibility)
+        function getBaseUrl() {
+            // Check if we're on GitHub Pages
+            const repoName = 'DreamArq-Web-Portfolio';
+            const currentUrl = window.location.href;
+            
+            if (currentUrl.includes('github.io')) {
+                // We're on GitHub Pages, return the repository path
+                return `/${repoName}`;
+            }
+            
+            // We're on local development or custom domain
+            return '';
         }
     </script>
 </body>

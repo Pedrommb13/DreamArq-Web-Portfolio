@@ -1,21 +1,45 @@
 {
-  "name": "ELO",
+  "name": "Moradia ELO",
   "short_description": "Innovative retail space with modular design elements",
   "description": "ELO is a commercial project that redefines the retail experience with its innovative modular design. The space can be easily reconfigured to accommodate different product displays and customer experiences. The architecture incorporates sustainable materials and energy-efficient lighting systems, while the clean lines and minimalist aesthetic create a sophisticated backdrop that lets the products shine.",
   "category": "commercial",
   "thumbnail": "Image1.png",
   "images": [
     {
-      "path": "storefront.jpg",
+      "path": "Image1.png",
       "caption": "Modern storefront design"
     },
     {
-      "path": "interior.jpg",
+      "path": "Image2.png",
       "caption": "Main retail space"
     },
     {
-      "path": "display.jpg",
-      "caption": "Modular product displays"
+      "path": "Image3.png",
+      "caption": "Product display area"
+    },
+    {
+      "path": "Image4.png",
+      "caption": "Interior details"
+    },
+    {
+      "path": "Image5.png",
+      "caption": "Entrance view"
+    },
+    {
+      "path": "Image6.png",
+      "caption": "ELO - Image6"
+    },
+    {
+      "path": "Image7.png",
+      "caption": "ELO - Image7"
+    },
+    {
+      "path": "Image8.png",
+      "caption": "ELO - Image8"
+    },
+    {
+      "path": "Image9.png",
+      "caption": "ELO - Image9"
     }
   ],
   "details": {

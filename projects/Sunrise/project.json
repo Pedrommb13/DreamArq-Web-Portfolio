@@ -6,16 +6,76 @@
   "thumbnail": "Image1.png",
   "images": [
     {
-      "path": "exterior.jpg",
-      "caption": "Exterior view at sunrise"
+      "path": "Image1.png",
+      "caption": "Vista exterior principal"
     },
     {
-      "path": "living.jpg",
-      "caption": "Open living area"
+      "path": "Image10.png",
+      "caption": "Sunrise - Image10"
     },
     {
-      "path": "garden.jpg",
-      "caption": "Sustainable garden space"
+      "path": "Image11.png",
+      "caption": "Sunrise - Image11"
+    },
+    {
+      "path": "Image12.png",
+      "caption": "Sunrise - Image12"
+    },
+    {
+      "path": "Image13.png",
+      "caption": "Sunrise - Image13"
+    },
+    {
+      "path": "Image14.png",
+      "caption": "Sunrise - Image14"
+    },
+    {
+      "path": "Image15.png",
+      "caption": "Sunrise - Image15"
+    },
+    {
+      "path": "Image16.png",
+      "caption": "Sunrise - Image16"
+    },
+    {
+      "path": "Image17.png",
+      "caption": "Sunrise - Image17"
+    },
+    {
+      "path": "Image18.png",
+      "caption": "Sunrise - Image18"
+    },
+    {
+      "path": "Image2.png",
+      "caption": "Vista lateral"
+    },
+    {
+      "path": "Image3.png",
+      "caption": "Vista dos fundos"
+    },
+    {
+      "path": "Image4.png",
+      "caption": "Área da piscina"
+    },
+    {
+      "path": "Image5.png",
+      "caption": "Sala de estar"
+    },
+    {
+      "path": "Image6.png",
+      "caption": "Sunrise - Image6"
+    },
+    {
+      "path": "Image7.png",
+      "caption": "Sunrise - Image7"
+    },
+    {
+      "path": "Image8.png",
+      "caption": "Sunrise - Image8"
+    },
+    {
+      "path": "Image9.png",
+      "caption": "Sunrise - Image9"
     }
   ],
   "details": {

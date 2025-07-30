@@ -1,9 +1,31 @@
+// Sample project data for fallback
+const sampleProjects = [
+    {
+        dir: 'sample1',
+        name: 'Projeto Amostra 1',
+        category: 'residential',
+        thumbnail: 'images/hero-bg-1.png',
+        short_description: 'Uma residência moderna com elementos sustentáveis.'
+    },
+    {
+        dir: 'sample2',
+        name: 'Projeto Amostra 2',
+        category: 'commercial',
+        thumbnail: 'images/hero-bg-2.png',
+        short_description: 'Espaço comercial inovador com design modular.'
+    }
+];
+
 document.addEventListener('DOMContentLoaded', function() {
     // Get base URL for GitHub Pages compatibility
     const baseUrl = getBaseUrl();
     
-    // Load projects from project directories
-    loadProjects(baseUrl);
+    // Check if we're on the main page by looking for the projects section
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+        // Only load projects on the main page
+        loadProjects(baseUrl);
+    }
 
     // Hero background image cycling
     const heroBgs = document.querySelectorAll('.hero-background');
@@ -95,17 +117,37 @@ document.addEventListener('DOMContentLoaded', function() {
             // Since we can't directly list directories using fetch in a browser,
             // we'll use a hard-coded array of project directories:
             const projectDirs = [
-                'Sunrise', 'Essence', 'Paúl', 'Breeze', 'ELO', 'Fazol', 'Azul'
+                'Sunrise', 'Essence', 'Paúl', 'Breeze', 'ELO', 'Fazol'
                 // Add more project folder names as needed
             ];
             
-            const projectsGrid = document.querySelector('.projects-grid');
+            // Get the projects grid with a more specific selector
+            const projectsSection = document.getElementById('projects');
+            if (!projectsSection) {
+                console.error('Projects section not found in the page');
+                return;
+            }
+            
+            const projectsGrid = projectsSection.querySelector('.projects-grid');
+            if (!projectsGrid) {
+                console.error('Project grid element not found in the projects section. Make sure there is an element with class "projects-grid" in the HTML.');
+                return;
+            }
+            
+            // Hide loading message if it exists
+            const loadingMessage = document.getElementById('loading-projects');
+            if (loadingMessage) {
+                loadingMessage.style.display = 'none';
+            }
+            
             projectsGrid.innerHTML = ''; // Clear existing project cards
             
             // Load each project's JSON data and create project cards
             const projectPromises = projectDirs.map(async (dir) => {
                 try {
-                    const jsonResponse = await fetch(`${baseUrl}/projects/${dir}/project.json`);
+                    // Encode directory name to handle special characters like 'ú'
+                    const encodedDir = encodeURIComponent(dir);
+                    const jsonResponse = await fetch(`${baseUrl}/projects/${encodedDir}/project.json`);
                     if (!jsonResponse.ok) {
                         console.error(`Could not load project.json for ${dir}`);
                         return null;
@@ -135,6 +177,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // For local development or GitHub Pages preview, we'll load a sample project
             const projectsGrid = document.querySelector('.projects-grid');
+            if (!projectsGrid) {
+                console.error('Project grid element not found for fallback loading.');
+                return;
+            }
+            
+            // Hide loading message if it exists
+            const loadingMessage = document.getElementById('loading-projects');
+            if (loadingMessage) {
+                loadingMessage.style.display = 'none';
+            }
             
             // Fallback: manually load project data from hard-coded values
             // This is temporary until you deploy to GitHub Pages
@@ -148,15 +200,18 @@ document.addEventListener('DOMContentLoaded', function() {
         card.className = 'project-card';
         card.setAttribute('data-category', projectData.category);
         
+        // Encode directory name to handle special characters like 'ú'
+        const encodedDir = encodeURIComponent(projectDir);
+        
         // Construct the image path with base URL for GitHub Pages compatibility
-        const thumbnailPath = `${baseUrl}/projects/${projectDir}/${projectData.thumbnail}`;
+        const thumbnailPath = `${baseUrl}/projects/${encodedDir}/${projectData.thumbnail}`;
         
         card.innerHTML = `
             <img src="${thumbnailPath}" alt="${projectData.name}">
             <div class="project-info">
                 <h3>${projectData.name}</h3>
                 <p>${projectData.short_description}</p>
-                <a href="${baseUrl}/projects/${projectDir}/index.html" class="btn-small">Ver Detalhes</a>
+                <a href="${baseUrl}/projects/${encodedDir}/index.html" class="btn-small">Ver Detalhes</a>
             </div>
         `;
         
@@ -164,8 +219,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Temporary function for local development before deployment
-    function loadSampleProjects(projectsGrid) {
+    function loadSampleProjects(projectsGrid, baseUrl) {
         // Clear the grid first
+        if (!projectsGrid) {
+            console.error('Projects grid element not found');
+            return;
+        }
+        
         projectsGrid.innerHTML = '';
         
         // Create and append sample project cards

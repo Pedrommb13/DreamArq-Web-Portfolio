@@ -33,7 +33,7 @@
     <main class="project-detail">
         <div class="container">
             <div class="back-link">
-                <a href="../../index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                <a href="../../#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
             </div>
             
             <div id="project-content">
@@ -52,10 +52,10 @@
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="../../index.html#about">About</a></li>
-                        <li><a href="../../index.html#projects">Projects</a></li>
-                        <li><a href="../../index.html#services">Services</a></li>
-                        <li><a href="../../index.html#contact">Contact</a></li>
+                        <li><a href="../../#about">About</a></li>
+                        <li><a href="../../#projects">Projects</a></li>
+                        <li><a href="../../#services">Services</a></li>
+                        <li><a href="../../#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
@@ -113,6 +113,8 @@
         
         function displayProjectDetails(projectDir, data) {
             const projectContent = document.getElementById('project-content');
+            // Make sure baseUrl is accessible within this function
+            const baseUrl = getBaseUrl();
             
             // Create HTML content for project details
             let html = `
