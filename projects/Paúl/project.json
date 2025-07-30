@@ -1,0 +1,27 @@
+{
+  "name": "Paúl",
+  "short_description": "Multi-functional space for community gatherings",
+  "description": "Paúl is a public project designed to serve as a cultural hub for the local community. The building features modular spaces that can be reconfigured for various events, exhibitions, and workshops. With sustainable materials and energy-efficient systems, this project exemplifies how public architecture can be both beautiful and environmentally responsible.",
+  "category": "public",
+  "thumbnail": "Image1.png",
+  "images": [
+    {
+      "path": "exterior.jpg",
+      "caption": "Exterior plaza and entrance"
+    },
+    {
+      "path": "hall.jpg",
+      "caption": "Main event hall"
+    },
+    {
+      "path": "courtyard.jpg",
+      "caption": "Internal courtyard"
+    }
+  ],
+  "details": {
+    "location": "Belo Horizonte, Brasil",
+    "year": "2024",
+    "area": "1800 m²",
+    "client": "Prefeitura Municipal"
+  }
+}

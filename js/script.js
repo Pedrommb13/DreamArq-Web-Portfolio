@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Load projects from project directories
+    loadProjects();
+
     // Hero background image cycling
     const heroBgs = document.querySelectorAll('.hero-background');
     let currentBgIndex = 0;
@@ -68,9 +71,148 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Project filtering functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projects = document.querySelectorAll('.project-card');
+    // Function to load projects from project directories
+    async function loadProjects() {
+        try {
+            // Fetch the list of project directories
+            const response = await fetch('/projects/');
+            if (!response.ok) {
+                throw new Error('Could not fetch project directories');
+            }
+            
+            // Since we can't directly list directories using fetch in a browser,
+            // we'll use a different approach for local development:
+            const projectDirs = [
+                'Sunrise', 'Essence', 'Paúl', 'Breeze', 'ELO', 'Fazol'
+                // Add more project folder names as needed
+            ];
+            
+            const projectsGrid = document.querySelector('.projects-grid');
+            projectsGrid.innerHTML = ''; // Clear existing project cards
+            
+            // Load each project's JSON data and create project cards
+            const projectPromises = projectDirs.map(async (dir) => {
+                try {
+                    const jsonResponse = await fetch(`/projects/${dir}/project.json`);
+                    if (!jsonResponse.ok) {
+                        console.error(`Could not load project.json for ${dir}`);
+                        return null;
+                    }
+                    
+                    const projectData = await jsonResponse.json();
+                    return { dir, data: projectData };
+                } catch (error) {
+                    console.error(`Error loading project ${dir}:`, error);
+                    return null;
+                }
+            });
+            
+            const projects = await Promise.all(projectPromises);
+            
+            // Create and append project cards for valid projects
+            projects.filter(project => project !== null).forEach(project => {
+                const projectCard = createProjectCard(project.dir, project.data);
+                projectsGrid.appendChild(projectCard);
+            });
+            
+            // Initialize project filtering after loading projects
+            initProjectFilters();
+            
+        } catch (error) {
+            console.error('Error loading projects:', error);
+            
+            // For local development or GitHub Pages preview, we'll load a sample project
+            const projectsGrid = document.querySelector('.projects-grid');
+            
+            // Fallback: manually load project data from hard-coded values
+            // This is temporary until you deploy to GitHub Pages
+            loadSampleProjects(projectsGrid);
+        }
+    }
+    
+    // Function to create a project card from project data
+    function createProjectCard(projectDir, projectData) {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.setAttribute('data-category', projectData.category);
+        
+        // Construct the image path
+        const thumbnailPath = `/projects/${projectDir}/${projectData.thumbnail}`;
+        
+        card.innerHTML = `
+            <img src="${thumbnailPath}" alt="${projectData.name}">
+            <div class="project-info">
+                <h3>${projectData.name}</h3>
+                <p>${projectData.short_description}</p>
+                <a href="/projects/${projectDir}/index.html" class="btn-small">View Details</a>
+            </div>
+        `;
+        
+        return card;
+    }
+    
+    // Temporary function for local development before deployment
+    function loadSampleProjects(projectsGrid) {
+        // Clear the grid first
+        projectsGrid.innerHTML = '';
+        
+        // Create and append sample project cards
+        sampleProjects.forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.setAttribute('data-category', project.category);
+            
+            card.innerHTML = `
+                <img src="${project.thumbnail}" alt="${project.name}">
+                <div class="project-info">
+                    <h3>${project.name}</h3>
+                    <p>${project.short_description}</p>
+                    <a href="#" class="btn-small project-details" data-project="${project.dir}">View Details</a>
+                </div>
+            `;
+            
+            projectsGrid.appendChild(card);
+        });
+        
+        // Add click event listeners to "View Details" buttons
+        document.querySelectorAll('.project-details').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const projectDir = this.getAttribute('data-project');
+                alert(`Project details for ${projectDir} will be displayed here. In production, this will link to the project's detail page.`);
+            });
+        });
+        
+        // Initialize the filtering functionality
+        initProjectFilters();
+    }
+    
+    // Initialize project filtering functionality
+    function initProjectFilters() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projects = document.querySelectorAll('.project-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Show/hide projects based on filter
+                projects.forEach(function(project) {
+                    if (filterValue === 'all' || project.getAttribute('data-category') === filterValue) {
+                        showProject(project);
+                    } else {
+                        hideProject(project);
+                    }
+                });
+            });
+        });
+    }
     
     // Show projects function
     function showProject(project) {
@@ -89,27 +231,6 @@ document.addEventListener('DOMContentLoaded', function() {
             project.style.display = 'none';
         }, 300);
     }
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class to clicked button
-            button.classList.add('active');
-            
-            const filterValue = button.getAttribute('data-filter');
-            
-            // Show/hide projects based on filter
-            projects.forEach(function(project) {
-                if (filterValue === 'all' || project.getAttribute('data-category') === filterValue) {
-                    showProject(project);
-                } else {
-                    hideProject(project);
-                }
-            });
-        });
-    });
 
     // Form submission handler
     const contactForm = document.querySelector('#contact form');
@@ -251,6 +372,18 @@ style.textContent = `
         color: #3c763d;
         text-align: center;
         font-weight: 600;
+    }
+    
+    .loading-message {
+        padding: 40px;
+        text-align: center;
+        color: #777;
+        width: 100%;
+    }
+    
+    .loading-message p {
+        font-size: 1.2rem;
+        margin: 0;
     }
 `;
 

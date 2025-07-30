@@ -1,0 +1,27 @@
+{
+  "name": "Essence",
+  "short_description": "Contemporary workspace designed for productivity",
+  "description": "Essence is a commercial project that reimagines the modern workspace. With a focus on collaboration and wellness, the design incorporates biophilic elements, flexible workstations, and communal areas that encourage creativity. The minimalist aesthetic combines with practical functionality to create an environment where teams can thrive.",
+  "category": "commercial",
+  "thumbnail": "Image1.png",
+  "images": [
+    {
+      "path": "entrance.jpg",
+      "caption": "Main entrance and façade"
+    },
+    {
+      "path": "workspace.jpg",
+      "caption": "Open workspace concept"
+    },
+    {
+      "path": "meeting.jpg",
+      "caption": "Collaborative meeting spaces"
+    }
+  ],
+  "details": {
+    "location": "Rio de Janeiro, Brasil",
+    "year": "2023",
+    "area": "1200 m²",
+    "client": "Essence Corporativo"
+  }
+}

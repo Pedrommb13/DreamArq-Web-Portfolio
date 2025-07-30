@@ -1,0 +1,31 @@
+{
+  "name": "Fazol",
+  "short_description": "Rural retreat with panoramic views",
+  "description": "Fazol is a contemporary rural retreat that harmonizes with its natural surroundings. This residential project takes full advantage of the spectacular landscape with large windows offering panoramic views, and expansive outdoor living spaces. The design incorporates sustainable materials and passive solar principles, while maintaining a connection to the traditional architectural elements of the region.",
+  "category": "residential",
+  "thumbnail": "Capa_Fazol.jpg",
+  "images": [
+    {
+      "path": "Image1.png",
+      "caption": "Exterior view with mountain backdrop"
+    },
+    {
+      "path": "Image5.png",
+      "caption": "Living area with panoramic views"
+    },
+    {
+      "path": "Image10.png",
+      "caption": "Outdoor entertainment space"
+    },
+    {
+      "path": "Image15.png",
+      "caption": "Integrated kitchen and dining area"
+    }
+  ],
+  "details": {
+    "location": "Minas Gerais, Brasil",
+    "year": "2024",
+    "area": "350 m²",
+    "client": "Família Mendonça"
+  }
+}

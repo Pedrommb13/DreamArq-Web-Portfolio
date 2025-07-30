@@ -1,0 +1,23 @@
+{
+  "name": "Project Name",
+  "short_description": "A brief description of the project that will appear on the card",
+  "description": "A longer description of the project that can include more details about the design, materials, challenges, etc.",
+  "category": "residential",
+  "thumbnail": "thumbnail.jpg",
+  "images": [
+    {
+      "path": "image1.jpg",
+      "caption": "Front view"
+    },
+    {
+      "path": "image2.jpg",
+      "caption": "Interior view"
+    }
+  ],
+  "details": {
+    "location": "City, Country",
+    "year": "2024",
+    "area": "250 m²",
+    "client": "Client Name"
+  }
+}

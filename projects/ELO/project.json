@@ -1,0 +1,27 @@
+{
+  "name": "ELO",
+  "short_description": "Innovative retail space with modular design elements",
+  "description": "ELO is a commercial project that redefines the retail experience with its innovative modular design. The space can be easily reconfigured to accommodate different product displays and customer experiences. The architecture incorporates sustainable materials and energy-efficient lighting systems, while the clean lines and minimalist aesthetic create a sophisticated backdrop that lets the products shine.",
+  "category": "commercial",
+  "thumbnail": "Image1.png",
+  "images": [
+    {
+      "path": "storefront.jpg",
+      "caption": "Modern storefront design"
+    },
+    {
+      "path": "interior.jpg",
+      "caption": "Main retail space"
+    },
+    {
+      "path": "display.jpg",
+      "caption": "Modular product displays"
+    }
+  ],
+  "details": {
+    "location": "Porto Alegre, Brasil",
+    "year": "2023",
+    "area": "320 m²",
+    "client": "ELO Retail Group"
+  }
+}

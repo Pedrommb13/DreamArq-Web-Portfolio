@@ -6,12 +6,14 @@ A modern, responsive architecture portfolio website built with HTML, CSS, and Ja
 
 - Responsive design that works on all devices
 - Modern and clean user interface
+- **Dynamic project loading from directory structure**
+- **Automatic generation of project pages**
 - Project filtering by category
 - Contact form
-- Newsletter subscription
 - Smooth scrolling navigation
 - Animations on scroll
 - Mobile-friendly navigation
+- Hero background image cycling
 
 ## Getting Started
 
@@ -36,23 +38,61 @@ A modern, responsive architecture portfolio website built with HTML, CSS, and Ja
 
 ## Customization Guide
 
-### Adding Your Own Projects
+### Adding Your Own Projects (Automated Method)
 
-1. Open `index.html` and locate the projects section
-2. Follow the existing structure to add new project cards:
+1. Create a new folder in the `projects` directory with your project name:
+   ```
+   projects/
+     └── YourNewProject/
+   ```
 
-```html
-<div class="project-card" data-category="your-category">
-    <img src="images/your-project-image.jpg" alt="Project Description">
-    <div class="project-info">
-        <h3>Project Title</h3>
-        <p>Project description goes here</p>
-        <a href="#" class="btn-small">View Details</a>
-    </div>
-</div>
-```
+2. Add your project images to this folder:
+   ```
+   projects/
+     └── YourNewProject/
+         ├── thumbnail.jpg
+         ├── image1.jpg
+         └── image2.jpg
+   ```
 
-3. Add your project images to the `images` folder
+3. Create a `project.json` file in your project directory:
+   ```json
+   {
+     "name": "Project Name",
+     "short_description": "Brief description for the card",
+     "description": "Full project description",
+     "category": "residential",
+     "thumbnail": "thumbnail.jpg",
+     "images": [
+       {
+         "path": "image1.jpg",
+         "caption": "Image caption 1"
+       },
+       {
+         "path": "image2.jpg",
+         "caption": "Image caption 2"
+       }
+     ],
+     "details": {
+       "location": "City, Country",
+       "year": "2024",
+       "area": "250 m²",
+       "client": "Client Name"
+     }
+   }
+   ```
+
+4. Alternatively, you can run the included script to generate the JSON template:
+   ```
+   node generate-project-metadata.js
+   ```
+
+5. Generate project detail pages by running:
+   ```
+   node generate-project-pages.js
+   ```
+
+The website will automatically load all projects from the `projects` directory without you having to modify any HTML.
 
 ### Updating Colors and Styles
 
@@ -88,13 +128,28 @@ You should update the following content in `index.html`:
 ```
 DreamArq-Web-Portfolio/
 ├── css/
-│   └── styles.css
+│   ├── styles.css
+│   └── project-detail.css
 ├── images/
-│   ├── hero-bg.jpg
-│   ├── placeholder-about.jpg
-│   └── placeholder-project1.jpg (etc.)
+│   ├── logo_black.png
+│   ├── logo_black_letters.png
+│   ├── logo_white.png
+│   └── hero-bg-1.png (etc.)
 ├── js/
 │   └── script.js
+├── projects/
+│   ├── project_template.json
+│   ├── Sunrise/
+│   │   ├── project.json
+│   │   ├── thumbnail.jpg
+│   │   └── other images...
+│   ├── Essence/
+│   │   ├── project.json
+│   │   └── images...
+│   └── other project folders...
+├── generate-project-metadata.js
+├── generate-project-pages.js
+├── project_template.html
 └── index.html
 ```
 

@@ -1,0 +1,27 @@
+{
+  "name": "Breeze",
+  "short_description": "Luxurious coastal residence with panoramic ocean views",
+  "description": "Breeze is a residential project that embraces its coastal location with an architecture that blurs the lines between indoor and outdoor living. Floor-to-ceiling windows capture breathtaking ocean views, while the design incorporates natural ventilation to bring the refreshing sea breeze throughout the home. Sustainable materials and energy-efficient features make this luxury residence environmentally conscious.",
+  "category": "residential",
+  "thumbnail": "Image1.png",
+  "images": [
+    {
+      "path": "exterior.jpg",
+      "caption": "Exterior view from the beach"
+    },
+    {
+      "path": "terrace.jpg",
+      "caption": "Infinity pool and terrace"
+    },
+    {
+      "path": "interior.jpg",
+      "caption": "Open-concept living area"
+    }
+  ],
+  "details": {
+    "location": "Florianópolis, Brasil",
+    "year": "2024",
+    "area": "450 m²",
+    "client": "Família Costa"
+  }
+}

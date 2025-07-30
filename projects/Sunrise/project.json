@@ -1,0 +1,27 @@
+{
+  "name": "Sunrise",
+  "short_description": "Minimalist family home with sustainable features",
+  "description": "Sunrise is a modern residential project that embraces sustainable living. The house features large windows to maximize natural light, solar panels for energy efficiency, and a minimalist design that creates open, flowing spaces. The integration of natural materials and smart home technology makes this a perfect blend of comfort and eco-consciousness.",
+  "category": "residential",
+  "thumbnail": "Image1.png",
+  "images": [
+    {
+      "path": "exterior.jpg",
+      "caption": "Exterior view at sunrise"
+    },
+    {
+      "path": "living.jpg",
+      "caption": "Open living area"
+    },
+    {
+      "path": "garden.jpg",
+      "caption": "Sustainable garden space"
+    }
+  ],
+  "details": {
+    "location": "São Paulo, Brasil",
+    "year": "2024",
+    "area": "280 m²",
+    "client": "Família Silva"
+  }
+}
