@@ -1,0 +1,109 @@
+/* Image loading animations */
+.image-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.image-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: loading-shine 1.5s infinite;
+    z-index: 1;
+}
+
+.image-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f0f0f0;
+    z-index: 0;
+}
+
+/* Optional: Add a subtle pulse animation */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.6; }
+}
+
+.image-loading {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.image-loaded::after,
+.image-loaded::before {
+    display: none;
+}
+
+@keyframes loading-shine {
+    to {
+        left: 100%;
+    }
+}
+
+/* Modifications for project cards */
+.project-card .image-container {
+    height: 250px; /* Same as project card img height */
+    border-radius: 8px 8px 0 0;
+}
+
+.project-card .image-container img {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card .image-loaded img {
+    opacity: 1;
+}
+
+/* Modifications for gallery images */
+.gallery-main .image-container {
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.gallery-main .image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-main .image-loaded img {
+    opacity: 1;
+}
+
+.thumbnail .image-container {
+    width: 100%;
+    height: 0;
+    padding-top: 100%; /* 1:1 aspect ratio for thumbnails */
+}
+
+.thumbnail .image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail .image-loaded img {
+    opacity: 1;
+}

@@ -6,6 +6,7 @@
     <title>Moradia Fazol - DreamArq Portfolio</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/project-detail.css">
+    <link rel="stylesheet" href="../../css/image-loading.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -123,15 +124,17 @@
                 
                 <div class="project-gallery">
                     <div class="gallery-main">
-                        <img src="${baseUrl}/projects/${projectDir}/${data.images[0].path}" alt="${data.images[0].caption}">
+                        <div class="image-container image-loading">
+                            <img src="${baseUrl}/projects/${projectDir}/${data.images[0].path}" alt="${data.images[0].caption}" onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
+                        </div>
                     </div>
                     
                     <div class="gallery-thumbnails">
                         ${data.images.map((image, index) => `
                             <div class="thumbnail${index === 0 ? ' active' : ''}">
-                                <img src="${baseUrl}/projects/${projectDir}/${image.path}" alt="${image.caption}"
-                                    data-full-src="${baseUrl}/projects/${projectDir}/${image.path}"
-                                    data-caption="${image.caption}">
+                            <div class="image-container image-loading">
+                                <img src="${baseUrl}/projects/${projectDir}/${image.path}" alt="${image.caption}" data-full-src="${baseUrl}/projects/${projectDir}/${image.path}" data-caption="${image.caption}" onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
+                            </div>
                             </div>
                         `).join('')}
                     </div>
@@ -161,7 +164,13 @@
             document.querySelectorAll('.thumbnail img').forEach(thumb => {
                 thumb.addEventListener('click', function() {
                     // Update main image
-                    const mainImg = document.querySelector('.gallery-main img');
+                    const mainImgContainer = document.querySelector('.gallery-main .image-container');
+                    const mainImg = mainImgContainer.querySelector('img');
+                    
+                    // Add loading class back
+                    mainImgContainer.classList.replace('image-loaded', 'image-loading');
+                    
+                    // Set new src to trigger loading
                     mainImg.src = this.getAttribute('data-full-src');
                     mainImg.alt = this.getAttribute('data-caption');
                     

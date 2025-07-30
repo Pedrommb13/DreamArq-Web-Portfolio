@@ -207,7 +207,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const thumbnailPath = `${baseUrl}/projects/${encodedDir}/${projectData.thumbnail}`;
         
         card.innerHTML = `
-            <img src="${thumbnailPath}" alt="${projectData.name}">
+            <div class="image-container image-loading">
+                <img src="${thumbnailPath}" alt="${projectData.name}" onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
+            </div>
             <div class="project-info">
                 <h3>${projectData.name}</h3>
                 <p>${projectData.short_description}</p>
@@ -235,7 +237,9 @@ document.addEventListener('DOMContentLoaded', function() {
             card.setAttribute('data-category', project.category);
             
             card.innerHTML = `
-                <img src="${project.thumbnail}" alt="${project.name}">
+                <div class="image-container image-loading">
+                    <img src="${project.thumbnail}" alt="${project.name}" onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
+                </div>
                 <div class="project-info">
                     <h3>${project.name}</h3>
                     <p>${project.short_description}</p>
