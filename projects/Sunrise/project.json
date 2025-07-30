@@ -10,6 +10,38 @@
       "caption": "Vista exterior principal"
     },
     {
+      "path": "Image2.png",
+      "caption": "Vista lateral"
+    },
+    {
+      "path": "Image3.png",
+      "caption": "Vista dos fundos"
+    },
+    {
+      "path": "Image4.png",
+      "caption": "Área da piscina"
+    },
+    {
+      "path": "Image5.png",
+      "caption": "Sala de estar"
+    },
+    {
+      "path": "Image6.png",
+      "caption": "Sunrise - Image6"
+    },
+    {
+      "path": "Image7.png",
+      "caption": "Sunrise - Image7"
+    },
+    {
+      "path": "Image8.png",
+      "caption": "Sunrise - Image8"
+    },
+    {
+      "path": "Image9.png",
+      "caption": "Sunrise - Image9"
+    },
+    {
       "path": "Image10.png",
       "caption": "Sunrise - Image10"
     },
@@ -44,38 +76,6 @@
     {
       "path": "Image18.png",
       "caption": "Sunrise - Image18"
-    },
-    {
-      "path": "Image2.png",
-      "caption": "Vista lateral"
-    },
-    {
-      "path": "Image3.png",
-      "caption": "Vista dos fundos"
-    },
-    {
-      "path": "Image4.png",
-      "caption": "Área da piscina"
-    },
-    {
-      "path": "Image5.png",
-      "caption": "Sala de estar"
-    },
-    {
-      "path": "Image6.png",
-      "caption": "Sunrise - Image6"
-    },
-    {
-      "path": "Image7.png",
-      "caption": "Sunrise - Image7"
-    },
-    {
-      "path": "Image8.png",
-      "caption": "Sunrise - Image8"
-    },
-    {
-      "path": "Image9.png",
-      "caption": "Sunrise - Image9"
     }
   ],
   "details": {
