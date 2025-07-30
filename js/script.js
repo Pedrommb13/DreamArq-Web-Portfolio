@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Get base URL for GitHub Pages compatibility
+    const baseUrl = getBaseUrl();
+    
     // Load projects from project directories
-    loadProjects();
+    loadProjects(baseUrl);
 
     // Hero background image cycling
     const heroBgs = document.querySelectorAll('.hero-background');
@@ -71,19 +74,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Function to determine the base URL (for GitHub Pages compatibility)
+    function getBaseUrl() {
+        // Check if we're on GitHub Pages
+        const repoName = 'DreamArq-Web-Portfolio';
+        const currentUrl = window.location.href;
+        
+        if (currentUrl.includes('github.io')) {
+            // We're on GitHub Pages, return the repository path
+            return `/${repoName}`;
+        }
+        
+        // We're on local development or custom domain
+        return '';
+    }
+    
     // Function to load projects from project directories
-    async function loadProjects() {
+    async function loadProjects(baseUrl) {
         try {
-            // Fetch the list of project directories
-            const response = await fetch('/projects/');
-            if (!response.ok) {
-                throw new Error('Could not fetch project directories');
-            }
-            
             // Since we can't directly list directories using fetch in a browser,
-            // we'll use a different approach for local development:
+            // we'll use a hard-coded array of project directories:
             const projectDirs = [
-                'Sunrise', 'Essence', 'Paúl', 'Breeze', 'ELO', 'Fazol'
+                'Sunrise', 'Essence', 'Paúl', 'Breeze', 'ELO', 'Fazol', 'Azul'
                 // Add more project folder names as needed
             ];
             
@@ -93,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Load each project's JSON data and create project cards
             const projectPromises = projectDirs.map(async (dir) => {
                 try {
-                    const jsonResponse = await fetch(`/projects/${dir}/project.json`);
+                    const jsonResponse = await fetch(`${baseUrl}/projects/${dir}/project.json`);
                     if (!jsonResponse.ok) {
                         console.error(`Could not load project.json for ${dir}`);
                         return null;
@@ -111,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Create and append project cards for valid projects
             projects.filter(project => project !== null).forEach(project => {
-                const projectCard = createProjectCard(project.dir, project.data);
+                const projectCard = createProjectCard(project.dir, project.data, baseUrl);
                 projectsGrid.appendChild(projectCard);
             });
             
@@ -126,25 +138,25 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Fallback: manually load project data from hard-coded values
             // This is temporary until you deploy to GitHub Pages
-            loadSampleProjects(projectsGrid);
+            loadSampleProjects(projectsGrid, baseUrl);
         }
     }
     
     // Function to create a project card from project data
-    function createProjectCard(projectDir, projectData) {
+    function createProjectCard(projectDir, projectData, baseUrl) {
         const card = document.createElement('div');
         card.className = 'project-card';
         card.setAttribute('data-category', projectData.category);
         
-        // Construct the image path
-        const thumbnailPath = `/projects/${projectDir}/${projectData.thumbnail}`;
+        // Construct the image path with base URL for GitHub Pages compatibility
+        const thumbnailPath = `${baseUrl}/projects/${projectDir}/${projectData.thumbnail}`;
         
         card.innerHTML = `
             <img src="${thumbnailPath}" alt="${projectData.name}">
             <div class="project-info">
                 <h3>${projectData.name}</h3>
                 <p>${projectData.short_description}</p>
-                <a href="/projects/${projectDir}/index.html" class="btn-small">View Details</a>
+                <a href="${baseUrl}/projects/${projectDir}/index.html" class="btn-small">Ver Detalhes</a>
             </div>
         `;
         
@@ -167,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="project-info">
                     <h3>${project.name}</h3>
                     <p>${project.short_description}</p>
-                    <a href="#" class="btn-small project-details" data-project="${project.dir}">View Details</a>
+                    <a href="#" class="btn-small project-details" data-project="${project.dir}">Ver Detalhes</a>
                 </div>
             `;
             
@@ -179,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 const projectDir = this.getAttribute('data-project');
-                alert(`Project details for ${projectDir} will be displayed here. In production, this will link to the project's detail page.`);
+                alert(`Detalhes do projeto ${projectDir} serão exibidos aqui. Em produção, isto irá direcionar para a página de detalhes do projeto.`);
             });
         });
         
@@ -253,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Display a success message
             const successMessage = document.createElement('div');
             successMessage.classList.add('success-message');
-            successMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+            successMessage.textContent = 'Obrigado pela sua mensagem! Entraremos em contato em breve.';
             
             contactForm.innerHTML = '';
             contactForm.appendChild(successMessage);
@@ -275,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Display a success message
                 const successMessage = document.createElement('div');
                 successMessage.classList.add('success-message');
-                successMessage.textContent = 'Thank you for subscribing to our newsletter!';
+                successMessage.textContent = 'Obrigado por se inscrever em nossa newsletter!';
                 
                 newsletterForm.innerHTML = '';
                 newsletterForm.appendChild(successMessage);
