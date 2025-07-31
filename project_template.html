@@ -155,10 +155,7 @@
                     <div class="project-details">
                         <h2>Project Details</h2>
                         <ul>
-                            <li><strong>Location:</strong> ${data.details.location}</li>
-                            <li><strong>Year:</strong> ${data.details.year}</li>
-                            <li><strong>Area:</strong> ${data.details.area}</li>
-                            <li><strong>Client:</strong> ${data.details.client}</li>
+                            ${generateDetailsListItems(data.details)}
                         </ul>
                     </div>
                 </div>
@@ -185,6 +182,35 @@
                     this.parentElement.classList.add('active');
                 });
             });
+        }
+        
+        function generateDetailsListItems(details) {
+            if (!details) return '';
+            
+            // Define display labels for keys
+            const detailsLabels = {
+                'location': 'Location',
+                'status': 'Status',
+                'type': 'Type',
+                'style': 'Style',
+                'year': 'Year',
+                'area': 'Area',
+                'client': 'Client',
+                'architect': 'Architect',
+                'budget': 'Budget'
+                // Add any other fields you might use
+            };
+            
+            // Generate list items for each detail that exists
+            let listItems = '';
+            for (const key in details) {
+                if (details[key]) { // Only include if value exists
+                    const label = detailsLabels[key] || key.charAt(0).toUpperCase() + key.slice(1);
+                    listItems += `<li><strong>${label}:</strong> ${details[key]}</li>\n                            `;
+                }
+            }
+            
+            return listItems;
         }
         
         function getCategoryLabel(category) {

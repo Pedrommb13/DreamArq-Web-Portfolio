@@ -43,9 +43,8 @@
     }
   ],
   "details": {
-    "location": "Porto Alegre, Brasil",
-    "year": "2023",
-    "area": "320 m²",
-    "client": "ELO Retail Group"
+    "status": "Completed",
+    "type": "Residential",
+    "style": "Modern"
   }
 }

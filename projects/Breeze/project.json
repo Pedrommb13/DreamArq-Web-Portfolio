@@ -9,7 +9,27 @@
       "path": "Image1.png",
       "caption": "Breeze - Image1"
     },
-        {
+    {
+      "path": "Image10.png",
+      "caption": "Breeze - Image10"
+    },
+    {
+      "path": "Image11.png",
+      "caption": "Breeze - Image11"
+    },
+    {
+      "path": "Image12.png",
+      "caption": "Breeze - Image12"
+    },
+    {
+      "path": "Image13.png",
+      "caption": "Breeze - Image13"
+    },
+    {
+      "path": "Image14.png",
+      "caption": "Breeze - Image14"
+    },
+    {
       "path": "Image2.png",
       "caption": "Exterior view from the beach"
     },
@@ -40,30 +60,9 @@
     {
       "path": "Image9.png",
       "caption": "Breeze - Image9"
-    },
-    {
-      "path": "Image10.png",
-      "caption": "Breeze - Image10"
-    },
-    {
-      "path": "Image11.png",
-      "caption": "Breeze - Image11"
-    },
-    {
-      "path": "Image12.png",
-      "caption": "Breeze - Image12"
-    },
-    {
-      "path": "Image13.png",
-      "caption": "Breeze - Image13"
-    },
-    {
-      "path": "Image14.png",
-      "caption": "Breeze - Image14"
     }
   ],
   "details": {
-    "location": "Florianópolis, Brasil",
     "year": "2024",
     "area": "450 m²",
     "client": "Família Costa"

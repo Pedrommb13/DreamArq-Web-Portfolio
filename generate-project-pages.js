@@ -22,12 +22,53 @@ function generateProjectPage(projectDir, projectData) {
       // This is just to prevent template literals in the template from being processed here
       return match;
     });
+    
+  // Generate dynamic details section with only the keys that have values
+  const detailsHtml = generateDetailsHtml(projectData.details || {});
+  
+  // Replace the project details section in the template
+  pageContent = pageContent.replace(
+    /<div class="project-details">[\s\S]*?<\/div>/,
+    `<div class="project-details">
+        <h2>Project Details</h2>
+        <ul>
+            ${detailsHtml}
+        </ul>
+    </div>`
+  );
   
   // Write the HTML file to the project directory
   const outputPath = path.join(projectsDir, projectDir, 'index.html');
   fs.writeFileSync(outputPath, pageContent);
   
   console.log(`Generated page for ${projectData.name} at ${outputPath}`);
+}
+
+// Function to generate HTML for project details based on available data
+function generateDetailsHtml(details) {
+  const detailsMapping = {
+    location: 'Location',
+    status: 'Status',
+    type: 'Type',
+    style: 'Style',
+    // Add any other possible fields here with their display labels
+    year: 'Year',
+    area: 'Area',
+    client: 'Client',
+    architect: 'Architect',
+    budget: 'Budget'
+  };
+  
+  let html = '';
+  
+  // Only generate HTML for fields that exist in the details object
+  Object.keys(details).forEach(key => {
+    if (details[key] && detailsMapping[key]) {
+      html += `<li><strong>${detailsMapping[key]}:</strong> ${details[key]}</li>\n            `;
+    }
+  });
+  
+  return html;
 }
 
 // Main function to process all project directories

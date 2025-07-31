@@ -10,38 +10,6 @@
       "caption": "Vista frontal"
     },
     {
-      "path": "Image2.png",
-      "caption": "Detalhe da fachada"
-    },
-    {
-      "path": "Image3.png",
-      "caption": "Vista do jardim interno"
-    },
-    {
-      "path": "Image4.png",
-      "caption": "Sala de estar"
-    },
-    {
-      "path": "Image5.png",
-      "caption": "Cozinha integrada"
-    },
-    {
-      "path": "Image6.png",
-      "caption": "Essence - Image6"
-    },
-    {
-      "path": "Image7.png",
-      "caption": "Essence - Image7"
-    },
-    {
-      "path": "Image8.png",
-      "caption": "Essence - Image8"
-    },
-    {
-      "path": "Image9.png",
-      "caption": "Essence - Image9"
-    },
-    {
       "path": "Image10.png",
       "caption": "Essence - Image10"
     },
@@ -76,10 +44,41 @@
     {
       "path": "Image18.png",
       "caption": "Essence - Image18"
+    },
+    {
+      "path": "Image2.png",
+      "caption": "Detalhe da fachada"
+    },
+    {
+      "path": "Image3.png",
+      "caption": "Vista do jardim interno"
+    },
+    {
+      "path": "Image4.png",
+      "caption": "Sala de estar"
+    },
+    {
+      "path": "Image5.png",
+      "caption": "Cozinha integrada"
+    },
+    {
+      "path": "Image6.png",
+      "caption": "Essence - Image6"
+    },
+    {
+      "path": "Image7.png",
+      "caption": "Essence - Image7"
+    },
+    {
+      "path": "Image8.png",
+      "caption": "Essence - Image8"
+    },
+    {
+      "path": "Image9.png",
+      "caption": "Essence - Image9"
     }
   ],
   "details": {
-    "location": "Rio de Janeiro, Brasil",
     "year": "2023",
     "area": "1200 m²",
     "client": "Essence Corporativo"
