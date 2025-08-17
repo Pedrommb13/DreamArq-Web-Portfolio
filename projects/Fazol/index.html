@@ -1,14 +1,12 @@
-<!DOCT    <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../../css/project-detail.css">
-    <link rel="stylesheet" href="../../css/image-loading.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moradia Fazol - DreamArq Portfolio</title>
+    <title>Nome do Projeto - Portfolio DreamArq</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/project-detail.css">
+    <link rel="stylesheet" href="../../css/image-loading.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -23,7 +21,7 @@
                 <li><a href="../../#about">Quem Somos</a></li>
                 <li><a href="../../#projects">Projetos</a></li>
                 <li><a href="../../#services">Serviços</a></li>
-                <li><a href="../../#contact">Contato</a></li>
+                <li><a href="../../#contact">Contactos</a></li>
             </ul>
             <div class="burger">
                 <div class="line1"></div>
@@ -36,12 +34,12 @@
     <main class="project-detail">
         <div class="container">
             <div class="back-link">
-                <a href="../../#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                <a href="../../#projects"><i class="fas fa-arrow-left"></i> Voltar aos Projetos</a>
             </div>
             
             <div id="project-content">
-                <!-- This content will be dynamically populated by JavaScript -->
-                <div class="loading">Loading project details...</div>
+                <!-- Este conteúdo será preenchido dinamicamente pelo JavaScript -->
+                <div class="loading">Carregando detalhes do projeto...</div>
             </div>
         </div>
     </main>
@@ -53,29 +51,29 @@
                     <img src="../../images/logo_white.png" alt="DreamArq Logo">
                 </div>
                 <div class="footer-links">
-                    <h3>Quick Links</h3>
+                    <h3>Links Rápidos</h3>
                     <ul>
-                        <li><a href="../../#about">About</a></li>
-                        <li><a href="../../#projects">Projects</a></li>
-                        <li><a href="../../#services">Services</a></li>
-                        <li><a href="../../#contact">Contact</a></li>
+                        <li><a href="../../#about">Quem Somos</a></li>
+                        <li><a href="../../#projects">Projetos</a></li>
+                        <li><a href="../../#services">Serviços</a></li>
+                        <li><a href="../../#contact">Contactos</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Design Street, Architecture City</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> contact@dreamarq.com</p>
+                    <h3>Entre em Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua do Design 123, Cidade da Arquitetura</p>
+                    <p><i class="fas fa-phone"></i> +351 960 366 965</p>
+                    <p><i class="fas fa-envelope"></i> geraldreamarq@gmail.com</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="https://www.facebook.com/share/1ArvnAvVFC/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/dreamarq.arquitetura?igsh=MTBrYzdjNHVlZGRrbQ==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/dream-arq-297b16372/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.tiktok.com/@dream.arq4?_t=ZG-8ySur46wOQa&_r=1" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 DreamArq. All rights reserved.</p>
+                <p>&copy; 2025 DreamArq. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -88,7 +86,7 @@
             const projectDir = pathParts[pathParts.indexOf('projects') + 1];
             
             if (!projectDir) {
-                showError('Project not found');
+                showError('Projeto não encontrado');
                 return;
             }
             
@@ -99,18 +97,18 @@
             fetch(`${baseUrl}/projects/${projectDir}/project.json`)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Project data not found');
+                        throw new Error('Dados do projeto não encontrados');
                     }
                     return response.json();
                 })
                 .then(projectData => {
                     displayProjectDetails(projectDir, projectData);
                     // Update page title
-                    document.title = `${projectData.name} - DreamArq Portfolio`;
+                    document.title = `${projectData.name} - Portfolio DreamArq`;
                 })
                 .catch(error => {
-                    console.error('Error loading project details:', error);
-                    showError('Could not load project details. Please try again later.');
+                    console.error('Erro ao carregar detalhes do projeto:', error);
+                    showError('Não foi possível carregar os detalhes do projeto. Tente novamente mais tarde.');
                 });
         });
         
@@ -148,16 +146,19 @@
                 
                 <div class="project-info-grid">
                     <div class="project-description">
-                        <h2>About this Project</h2>
+                        <h2>Sobre este Projeto</h2>
                         <p>${data.description}</p>
                     </div>
                     
                     <div class="project-details">
-                        <h2>Project Details</h2>
-                        <ul>
-                            ${generateDetailsListItems(data.details)}
-                        </ul>
-                    </div>
+        <h2>Project Details</h2>
+        <ul>
+            <li><strong>Year:</strong> 2024</li>
+            <li><strong>Area:</strong> 350 m²</li>
+            <li><strong>Client:</strong> Família Mendonça</li>
+            
+        </ul>
+    </div>
                 </div>
             `;
             
@@ -184,21 +185,20 @@
             });
         }
         
-        
         function generateDetailsListItems(details) {
             if (!details) return '';
             
             // Define display labels for keys
             const detailsLabels = {
-                'location': 'Location',
-                'status': 'Status',
-                'type': 'Type',
-                'style': 'Style',
-                'year': 'Year',
-                'area': 'Area',
-                'client': 'Client',
-                'architect': 'Architect',
-                'budget': 'Budget'
+                'location': 'Localização',
+                'status': 'Estado',
+                'type': 'Tipo',
+                'style': 'Estilo',
+                'year': 'Ano',
+                'area': 'Área',
+                'client': 'Cliente',
+                'architect': 'Arquiteto',
+                'budget': 'Orçamento'
                 // Add any other fields you might use
             };
             
@@ -213,16 +213,16 @@
             
             return listItems;
         }
-
+        
         function getCategoryLabel(category) {
             const categories = {
-                'residential': 'Residential Project',
-                'commercial': 'Commercial Project',
-                'public': 'Public Project',
-                'mixed': 'Mixed-Use Project'
+                'residential': 'Projeto Residencial',
+                'commercial': 'Projeto Comercial',
+                'public': 'Projeto Público',
+                'mixed': 'Projeto de Uso Misto'
             };
             
-            return categories[category] || 'Project';
+            return categories[category] || 'Projeto';
         }
         
         function showError(message) {
@@ -232,7 +232,7 @@
                 <div class="error-message">
                     <i class="fas fa-exclamation-triangle"></i>
                     <p>${message}</p>
-                    <a href="${baseUrl}/index.html#projects" class="btn-small">Back to Projects</a>
+                    <a href="${baseUrl}/index.html#projects" class="btn-small">Voltar aos Projetos</a>
                 </div>
             `;
         }
