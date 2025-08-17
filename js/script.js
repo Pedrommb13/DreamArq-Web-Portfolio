@@ -111,6 +111,22 @@ document.addEventListener('DOMContentLoaded', function() {
         return '';
     }
     
+    // Helper function to truncate text
+    function truncateText(text, maxLength) {
+        if (!text) return '';
+        if (text.length <= maxLength) return text;
+        
+        // Find the last space before the max length to avoid cutting words
+        const truncated = text.substring(0, maxLength);
+        const lastSpaceIndex = truncated.lastIndexOf(' ');
+        
+        if (lastSpaceIndex > 0) {
+            return truncated.substring(0, lastSpaceIndex) + '...';
+        }
+        
+        return truncated + '...';
+    }
+    
     // Function to load projects from project directories
     async function loadProjects(baseUrl) {
         try {
@@ -207,6 +223,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const thumbnailPath = `${baseUrl}/projects/${encodedDir}/${projectData.thumbnail}`;
         const projectPageUrl = `${baseUrl}/projects/${encodedDir}/index.html`;
         
+        // Truncate description if too long
+        const truncatedDescription = truncateText(projectData.short_description, 300);
+        
         card.innerHTML = `
             <a href="${projectPageUrl}" class="project-link">
                 <div class="image-container image-loading">
@@ -217,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <a href="${projectPageUrl}" class="project-title-link">
                     <h3>${projectData.name}</h3>
                 </a>
-                <p>${projectData.short_description}</p>
+                <p>${truncatedDescription}</p>
                 <a href="${projectPageUrl}" class="btn-small">Ver Detalhes</a>
             </div>
         `;
@@ -241,6 +260,9 @@ document.addEventListener('DOMContentLoaded', function() {
             card.className = 'project-card';
             card.setAttribute('data-category', project.category);
             
+            // Truncate description if too long
+            const truncatedDescription = truncateText(project.short_description, 300);
+            
             card.innerHTML = `
                 <a href="#" class="project-link project-details" data-project="${project.dir}">
                     <div class="image-container image-loading">
@@ -251,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <a href="#" class="project-title-link project-details" data-project="${project.dir}">
                         <h3>${project.name}</h3>
                     </a>
-                    <p>${project.short_description}</p>
+                    <p>${truncatedDescription}</p>
                     <a href="#" class="btn-small project-details" data-project="${project.dir}">Ver Detalhes</a>
                 </div>
             `;
@@ -497,6 +519,7 @@ style.textContent = `
         margin: 0;
         transition: color 0.3s ease;
     }
+    
 `;
 
 document.head.appendChild(style);
