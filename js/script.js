@@ -520,6 +520,38 @@ style.textContent = `
         transition: color 0.3s ease;
     }
     
+    /* Project info layout to position button at bottom */
+    .project-info {
+        display: flex;
+        flex-direction: column;
+        min-height: 140px;
+        padding: 20px;
+    }
+    
+    .project-info .btn-small {
+        margin-top: auto;
+        align-self: flex-start;
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+    
+    .project-info .btn-small:hover {
+        background-color: #c0392b;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
 `;
 
 document.head.appendChild(style);
