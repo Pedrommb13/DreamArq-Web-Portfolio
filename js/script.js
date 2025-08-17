@@ -474,9 +474,9 @@ style.textContent = `
     
     .success-message {
         padding: 20px;
-        background-color: #dff0d8;
+        background-color: #f0f0f0;
         border-radius: 4px;
-        color: #3c763d;
+        color: #000000;
         text-align: center;
         font-weight: 600;
     }
@@ -484,7 +484,7 @@ style.textContent = `
     .loading-message {
         padding: 40px;
         text-align: center;
-        color: #777;
+        color: #666666;
         width: 100%;
     }
     
@@ -547,7 +547,7 @@ style.textContent = `
     }
     
     .project-info .btn-small:hover {
-        background-color: #c0392b;
+        background-color: #666666;
         transform: translateY(-3px);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
