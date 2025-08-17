@@ -123,24 +123,32 @@
                 <div class="project-category">${getCategoryLabel(data.category)}</div>
                 
                 <div class="project-gallery">
-                    <div class="gallery-main">
-                        <div class="image-container image-loading">
-                            <img src="${baseUrl}/projects/${projectDir}/${data.images[0].path}" alt="${data.images[0].caption}"
-                                onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
-                        </div>
-                    </div>
-                    
-                    <div class="gallery-thumbnails">
-                        ${data.images.map((image, index) => `
-                            <div class="thumbnail${index === 0 ? ' active' : ''}">
-                                <div class="image-container image-loading">
-                                    <img src="${baseUrl}/projects/${projectDir}/${image.path}" alt="${image.caption}"
-                                        data-full-src="${baseUrl}/projects/${projectDir}/${image.path}"
-                                        data-caption="${image.caption}"
-                                        onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
-                                </div>
+                    <div class="carousel-container">
+                        <div class="carousel-wrapper">
+                            <div class="carousel-slides" id="carousel-slides">
+                                ${data.images.map((image, index) => `
+                                    <div class="carousel-slide${index === 0 ? ' active' : ''}">
+                                        <div class="image-container image-loading">
+                                            <img src="${baseUrl}/projects/${projectDir}/${image.path}" alt="${image.caption}"
+                                                onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
+                                        </div>
+                                    </div>
+                                `).join('')}
                             </div>
-                        `).join('')}
+                        </div>
+                        
+                        <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn carousel-next" onclick="changeSlide(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <div class="carousel-indicators">
+                            ${data.images.map((_, index) => `
+                                <span class="indicator${index === 0 ? ' active' : ''}" onclick="currentSlide(${index + 1})"></span>
+                            `).join('')}
+                        </div>
                     </div>
                 </div>
                 
@@ -151,7 +159,7 @@
                     </div>
                     
                     <div class="project-details">
-                        <h2>Project Details</h2>
+                        <h2>Detalhes do Projeto</h2>
                         <ul>
                             ${generateDetailsListItems(data.details)}
                         </ul>
@@ -161,26 +169,74 @@
             
             projectContent.innerHTML = html;
             
-            // Add thumbnail click handlers
-            document.querySelectorAll('.thumbnail img').forEach(thumb => {
-                thumb.addEventListener('click', function() {
-                    // Update main image
-                    const mainImgContainer = document.querySelector('.gallery-main .image-container');
-                    const mainImg = mainImgContainer.querySelector('img');
-                    
-                    // Add loading class back
-                    mainImgContainer.classList.replace('image-loaded', 'image-loading');
-                    
-                    // Set new src to trigger loading
-                    mainImg.src = this.getAttribute('data-full-src');
-                    mainImg.alt = this.getAttribute('data-caption');
-                    
-                    // Update active class
-                    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-                    this.parentElement.classList.add('active');
-                });
-            });
+            // Initialize carousel
+            initializeCarousel();
         }
+        
+        // Carousel functionality
+        let slideIndex = 1;
+        
+        function initializeCarousel() {
+            showSlide(slideIndex);
+        }
+        
+        function changeSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            slideIndex += n;
+            
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            if (slideIndex < 1) {
+                slideIndex = slides.length;
+            }
+            
+            showSlide(slideIndex);
+        }
+        
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Remove active class from all indicators
+            indicators.forEach(indicator => {
+                indicator.classList.remove('active');
+            });
+            
+            // Show current slide and activate indicator
+            if (slides[n - 1]) {
+                slides[n - 1].classList.add('active');
+            }
+            if (indicators[n - 1]) {
+                indicators[n - 1].classList.add('active');
+            }
+        }
+        
+        // Auto-play carousel (optional)
+        function startAutoPlay() {
+            setInterval(() => {
+                changeSlide(1);
+            }, 5000); // Change slide every 5 seconds
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
         
         function generateDetailsListItems(details) {
             if (!details) return '';
