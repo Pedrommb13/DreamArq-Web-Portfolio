@@ -205,15 +205,20 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Construct the image path with base URL for GitHub Pages compatibility
         const thumbnailPath = `${baseUrl}/projects/${encodedDir}/${projectData.thumbnail}`;
+        const projectPageUrl = `${baseUrl}/projects/${encodedDir}/index.html`;
         
         card.innerHTML = `
-            <div class="image-container image-loading">
-                <img src="${thumbnailPath}" alt="${projectData.name}" onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
-            </div>
+            <a href="${projectPageUrl}" class="project-link">
+                <div class="image-container image-loading">
+                    <img src="${thumbnailPath}" alt="${projectData.name}" onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
+                </div>
+            </a>
             <div class="project-info">
-                <h3>${projectData.name}</h3>
+                <a href="${projectPageUrl}" class="project-title-link">
+                    <h3>${projectData.name}</h3>
+                </a>
                 <p>${projectData.short_description}</p>
-                <a href="${baseUrl}/projects/${encodedDir}/index.html" class="btn-small">Ver Detalhes</a>
+                <a href="${projectPageUrl}" class="btn-small">Ver Detalhes</a>
             </div>
         `;
         
@@ -237,11 +242,15 @@ document.addEventListener('DOMContentLoaded', function() {
             card.setAttribute('data-category', project.category);
             
             card.innerHTML = `
-                <div class="image-container image-loading">
-                    <img src="${project.thumbnail}" alt="${project.name}" onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
-                </div>
+                <a href="#" class="project-link project-details" data-project="${project.dir}">
+                    <div class="image-container image-loading">
+                        <img src="${project.thumbnail}" alt="${project.name}" onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
+                    </div>
+                </a>
                 <div class="project-info">
-                    <h3>${project.name}</h3>
+                    <a href="#" class="project-title-link project-details" data-project="${project.dir}">
+                        <h3>${project.name}</h3>
+                    </a>
                     <p>${project.short_description}</p>
                     <a href="#" class="btn-small project-details" data-project="${project.dir}">Ver Detalhes</a>
                 </div>
@@ -460,6 +469,33 @@ style.textContent = `
     .loading-message p {
         font-size: 1.2rem;
         margin: 0;
+    }
+    
+    /* Project card link styles */
+    .project-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.3s ease;
+    }
+    
+    .project-link:hover {
+        transform: scale(1.02);
+    }
+    
+    .project-title-link {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease;
+    }
+    
+    .project-title-link:hover {
+        color: var(--secondary-color);
+    }
+    
+    .project-title-link h3 {
+        margin: 0;
+        transition: color 0.3s ease;
     }
 `;
 
