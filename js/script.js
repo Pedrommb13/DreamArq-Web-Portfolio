@@ -1,3 +1,46 @@
+// Performance enhancement functions - defined globally for accessibility
+window.handleImageLoad = function(img) {
+    console.log('Image loaded successfully:', img.src);
+    const container = img.parentNode;
+    container.classList.replace('image-loading', 'image-loaded');
+    img.classList.add('loaded');
+    
+    // Add fade-in effect for better UX
+    img.style.opacity = '0';
+    img.style.transition = 'opacity 0.3s ease-in-out';
+    setTimeout(() => {
+        img.style.opacity = '1';
+    }, 50);
+};
+
+window.handleImageError = function(img) {
+    console.log('Image failed to load:', img.src);
+    const container = img.parentNode;
+    container.classList.remove('image-loading');
+    container.classList.add('image-error');
+    
+    // Set a fallback background
+    img.style.background = '#f0f0f0';
+    img.style.display = 'none';
+    
+    // Add error indicator
+    if (!container.querySelector('.error-indicator')) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-indicator';
+        errorDiv.innerHTML = '<i class="fas fa-image"></i><p>Imagem não disponível</p>';
+        errorDiv.style.cssText = `
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            background: #f9f9f9;
+        `;
+        container.appendChild(errorDiv);
+    }
+};
+
 // Sample project data for fallback
 const sampleProjects = [
     {
@@ -127,6 +170,91 @@ document.addEventListener('DOMContentLoaded', function() {
         return truncated + '...';
     }
     
+    // Performance Enhancement Functions have been moved to global scope above
+    
+    // Intersection Observer for progressive loading
+    let observer;
+    
+    function initializeIntersectionObserver() {
+        if ('IntersectionObserver' in window) {
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+        }
+    }
+    
+    function observeElement(element) {
+        if (observer) {
+            observer.observe(element);
+        }
+    }
+    
+    // Initialize performance features when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeIntersectionObserver();
+        
+        // Preload critical images
+        preloadCriticalImages();
+        
+        // Initialize lazy loading fallback for older browsers
+        initializeLazyLoadingFallback();
+    });
+    
+    // Preload critical images (hero background, etc.)
+    function preloadCriticalImages() {
+        const criticalImages = [
+            'images/hero-bg-1.png',
+            'images/hero-bg-2.png',
+            'images/hero-bg-3.png',
+            'images/logo_black_letters.png'
+        ];
+        
+        criticalImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }
+    
+    // Fallback for browsers that don't support lazy loading
+    function initializeLazyLoadingFallback() {
+        if ('loading' in HTMLImageElement.prototype) {
+            return; // Native lazy loading is supported
+        }
+        
+        // Polyfill for older browsers
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('IntersectionObserver' in window) {
+            const lazyImageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.remove('lazy');
+                        lazyImageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(img => {
+                lazyImageObserver.observe(img);
+            });
+        } else {
+            // Fallback for very old browsers
+            lazyImages.forEach(img => {
+                img.src = img.dataset.src || img.src;
+            });
+        }
+    }
+    
     // Function to load projects from project directories
     async function loadProjects(baseUrl) {
         try {
@@ -163,9 +291,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     // Encode directory name to handle special characters like 'ú'
                     const encodedDir = encodeURIComponent(dir);
-                    const jsonResponse = await fetch(`${baseUrl}/projects/${encodedDir}/project.json`);
+                    const jsonUrl = `${baseUrl}/projects/${encodedDir}/project.json`;
+                    
+                    const jsonResponse = await fetch(jsonUrl);
                     if (!jsonResponse.ok) {
-                        console.error(`Could not load project.json for ${dir}`);
+                        console.error(`Could not load project.json for ${dir}. Status: ${jsonResponse.status}`);
                         return null;
                     }
                     
@@ -179,10 +309,34 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const projects = await Promise.all(projectPromises);
             
-            // Create and append project cards for valid projects
-            projects.filter(project => project !== null).forEach(project => {
+            // Create and append project cards for valid projects with staggered animations
+            projects.filter(project => project !== null).forEach((project, index) => {
                 const projectCard = createProjectCard(project.dir, project.data, baseUrl);
+                
+                // Ensure the card has the loaded class for immediate visibility
+                projectCard.classList.add('loaded');
+                
+                // Add staggered loading animation
+                projectCard.style.animationDelay = `${index * 0.1}s`;
+                projectCard.classList.add('card-loading');
+                
+                // Make sure the card is visible
+                projectCard.style.opacity = '1';
+                projectCard.style.display = 'block';
+                
                 projectsGrid.appendChild(projectCard);
+                console.log(`Added project card for ${project.data.name}`);
+                
+                // Observe for intersection - but don't make it dependent on this
+                if (typeof observeElement === 'function') {
+                    observeElement(projectCard);
+                }
+                
+                // Remove loading animation after animation completes
+                setTimeout(() => {
+                    projectCard.classList.remove('card-loading');
+                    projectCard.classList.add('loaded');
+                }, 800 + (index * 100));
             });
             
             // Initialize project filtering after loading projects
@@ -213,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to create a project card from project data
     function createProjectCard(projectDir, projectData, baseUrl) {
         const card = document.createElement('div');
-        card.className = 'project-card';
+        card.className = 'project-card fade-in-up loaded'; // Add 'loaded' class immediately
         card.setAttribute('data-category', projectData.category);
         
         // Encode directory name to handle special characters like 'ú'
@@ -229,7 +383,11 @@ document.addEventListener('DOMContentLoaded', function() {
         card.innerHTML = `
             <a href="${projectPageUrl}" class="project-link">
                 <div class="image-container image-loading">
-                    <img src="${thumbnailPath}" alt="${projectData.name}" onload="this.parentNode.classList.replace('image-loading', 'image-loaded')">
+                    <img src="${thumbnailPath}" 
+                         alt="${projectData.name}" 
+                         loading="lazy"
+                         onload="if(typeof handleImageLoad === 'function') handleImageLoad(this); else this.parentNode.classList.replace('image-loading', 'image-loaded');"
+                         onerror="if(typeof handleImageError === 'function') handleImageError(this); else console.error('Image failed to load');">
                 </div>
             </a>
             <div class="project-info">

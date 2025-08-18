@@ -87,6 +87,47 @@
 
     <script src="../../js/script.js"></script>
     <script>
+        // Performance enhancement functions fallback
+        function handleImageLoad(img) {
+            const container = img.parentNode;
+            container.classList.replace('image-loading', 'image-loaded');
+            img.classList.add('loaded');
+            
+            // Add fade-in effect for better UX
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.3s ease-in-out';
+            setTimeout(() => {
+                img.style.opacity = '1';
+            }, 50);
+        }
+        
+        function handleImageError(img) {
+            const container = img.parentNode;
+            container.classList.remove('image-loading');
+            container.classList.add('image-error');
+            
+            // Set a fallback background
+            img.style.background = '#f0f0f0';
+            img.style.display = 'none';
+            
+            // Add error indicator
+            if (!container.querySelector('.error-indicator')) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-indicator';
+                errorDiv.innerHTML = '<i class="fas fa-image"></i><p>Imagem não disponível</p>';
+                errorDiv.style.cssText = `
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    color: #999;
+                    background: #f9f9f9;
+                `;
+                container.appendChild(errorDiv);
+            }
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Get the project directory name from the URL path
             const pathParts = window.location.pathname.split('/');
@@ -137,7 +178,9 @@
                                     <div class="carousel-slide${index === 0 ? ' active' : ''}">
                                         <div class="image-container image-loading">
                                             <img src="${baseUrl}/projects/${projectDir}/${image.path}" alt="${image.caption}"
-                                                onload="this.parentNode.classList.replace('image-loading', 'image-loaded')"
+                                                ${index > 0 ? 'loading="lazy"' : ''}
+                                                onload="handleImageLoad ? handleImageLoad(this) : this.parentNode.classList.replace('image-loading', 'image-loaded')"
+                                                onerror="handleImageError ? handleImageError(this) : console.error('Image failed to load')"
                                                 onclick="openModal('${baseUrl}/projects/${projectDir}/${image.path}')"
                                                 style="cursor: pointer;"
                                                 title="Clique para ampliar">
@@ -179,8 +222,29 @@
             
             projectContent.innerHTML = html;
             
-            // Initialize carousel
+            // Initialize carousel with performance enhancements
             initializeCarousel();
+            
+            // Add progressive loading animations
+            const projectElements = projectContent.querySelectorAll('.project-title, .project-category, .carousel-container, .project-info-grid');
+            projectElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                element.style.animationDelay = `${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+            
+            // Initialize intersection observer for project elements
+            if (typeof observeElement === 'function') {
+                projectElements.forEach(element => {
+                    observeElement(element);
+                });
+            }
         }
         
         // Carousel functionality
@@ -226,7 +290,27 @@
             // Show current slide and activate indicator
             if (slides[n - 1]) {
                 slides[n - 1].classList.add('active');
+                
+                // Lazy load current slide image if not already loaded
+                const currentImg = slides[n - 1].querySelector('img');
+                if (currentImg && !currentImg.src && currentImg.dataset.src) {
+                    currentImg.src = currentImg.dataset.src;
+                }
+                
+                // Preload next and previous slides for smooth navigation
+                const nextIndex = n < slides.length ? n : 0;
+                const prevIndex = n > 1 ? n - 2 : slides.length - 1;
+                
+                [nextIndex, prevIndex].forEach(index => {
+                    if (slides[index]) {
+                        const img = slides[index].querySelector('img');
+                        if (img && !img.src && img.dataset.src) {
+                            img.src = img.dataset.src;
+                        }
+                    }
+                });
             }
+            
             if (indicators[n - 1]) {
                 indicators[n - 1].classList.add('active');
             }

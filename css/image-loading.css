@@ -50,6 +50,75 @@
     }
 }
 
+/* Enhanced Skeleton Loading */
+.skeleton-loader {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Skeleton for project cards */
+.project-card.loading {
+    pointer-events: none;
+}
+
+.project-card.loading .project-info h3,
+.project-card.loading .project-info p {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    color: transparent;
+    border-radius: 4px;
+    min-height: 1.2em;
+}
+
+.project-card.loading .project-info h3 {
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+.project-card.loading .project-info p {
+    width: 90%;
+    margin-bottom: 8px;
+}
+
+.project-card.loading .project-info p:last-child {
+    width: 60%;
+}
+
+/* Skeleton for carousel */
+.carousel-slide.loading img {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+/* Progressive loading enhancement */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-up.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation for multiple elements */
+.fade-in-up:nth-child(1) { transition-delay: 0.1s; }
+.fade-in-up:nth-child(2) { transition-delay: 0.2s; }
+.fade-in-up:nth-child(3) { transition-delay: 0.3s; }
+.fade-in-up:nth-child(4) { transition-delay: 0.4s; }
+.fade-in-up:nth-child(5) { transition-delay: 0.5s; }
+.fade-in-up:nth-child(6) { transition-delay: 0.6s; }
+
 /* Modifications for project cards */
 .project-card .image-container {
     height: 250px; /* Same as project card img height */
