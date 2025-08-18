@@ -75,21 +75,34 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentBgIndex = 0;
     
     function cycleBackgrounds() {
+        // Check if hero backgrounds exist
+        if (!heroBgs || heroBgs.length === 0) {
+            return; // Exit early if no hero backgrounds found
+        }
+        
         // Hide all backgrounds
         heroBgs.forEach((bg, index) => {
-            bg.style.opacity = 0;
+            if (bg && bg.style) {
+                bg.style.opacity = 0;
+            }
         });
         
         // Show the next background
         currentBgIndex = (currentBgIndex + 1) % heroBgs.length;
-        heroBgs[currentBgIndex].style.opacity = 1;
+        
+        // Check if the current background element exists
+        if (heroBgs[currentBgIndex] && heroBgs[currentBgIndex].style) {
+            heroBgs[currentBgIndex].style.opacity = 1;
+        }
         
         // Call again after delay
         setTimeout(cycleBackgrounds, 5000); // Change image every 5 seconds
     }
     
-    // Start the cycling after a delay
-    setTimeout(cycleBackgrounds, 5000);
+    // Start the cycling after a delay, but only if hero backgrounds exist
+    if (heroBgs && heroBgs.length > 0) {
+        setTimeout(cycleBackgrounds, 5000);
+    }
     
     // Navigation menu toggle for mobile
     const burger = document.querySelector('.burger');

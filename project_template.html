@@ -181,7 +181,7 @@
                                                 ${index > 0 ? 'loading="lazy"' : ''}
                                                 onload="handleImageLoad ? handleImageLoad(this) : this.parentNode.classList.replace('image-loading', 'image-loaded')"
                                                 onerror="handleImageError ? handleImageError(this) : console.error('Image failed to load')"
-                                                onclick="openModal('${baseUrl}/projects/${projectDir}/${image.path}')"
+                                                onclick="openModalFromCarousel()"
                                                 style="cursor: pointer;"
                                                 title="Clique para ampliar">
                                         </div>
@@ -394,6 +394,17 @@
             
             // Prevent body scrolling when modal is open
             document.body.style.overflow = 'hidden';
+        }
+        
+        // Open modal with currently active carousel image
+        function openModalFromCarousel() {
+            const activeSlide = document.querySelector('.carousel-slide.active');
+            if (activeSlide) {
+                const activeImg = activeSlide.querySelector('img');
+                if (activeImg && activeImg.src) {
+                    openModal(activeImg.src);
+                }
+            }
         }
         
         function closeModal() {
