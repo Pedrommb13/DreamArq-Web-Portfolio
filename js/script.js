@@ -1,33 +1,50 @@
-// Performance enhancement functions - defined globally for accessibility
+// Enhanced performance functions - defined globally for accessibility
 window.handleImageLoad = function(img) {
     console.log('Image loaded successfully:', img.src);
     const container = img.parentNode;
-    container.classList.replace('image-loading', 'image-loaded');
-    img.classList.add('loaded');
+    const projectCard = img.closest('.project-card');
     
-    // Add fade-in effect for better UX
-    img.style.opacity = '0';
-    img.style.transition = 'opacity 0.3s ease-in-out';
+    // Add a small delay for smoother transition
     setTimeout(() => {
-        img.style.opacity = '1';
-    }, 50);
+        container.classList.replace('image-loading', 'image-loaded');
+        img.classList.add('loaded');
+        
+        // Mark project card as loaded if it exists
+        if (projectCard) {
+            projectCard.classList.add('loaded');
+        }
+        
+        // Add staggered entrance animation
+        if (projectCard) {
+            const allCards = document.querySelectorAll('.project-card');
+            const cardIndex = Array.from(allCards).indexOf(projectCard);
+            projectCard.style.transitionDelay = `${cardIndex * 0.1}s`;
+        }
+    }, 150);
 };
 
 window.handleImageError = function(img) {
     console.log('Image failed to load:', img.src);
     const container = img.parentNode;
+    const projectCard = img.closest('.project-card');
+    
     container.classList.remove('image-loading');
     container.classList.add('image-error');
     
+    // Still mark as loaded to show the card
+    if (projectCard) {
+        projectCard.classList.add('loaded');
+    }
+    
     // Set a fallback background
-    img.style.background = '#f0f0f0';
+    img.style.background = '#f0f2f5';
     img.style.display = 'none';
     
-    // Add error indicator
+    // Add error indicator with better styling
     if (!container.querySelector('.error-indicator')) {
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-indicator';
-        errorDiv.innerHTML = '<i class="fas fa-image"></i><p>Imagem não disponível</p>';
+        errorDiv.innerHTML = '<i class="fas fa-image"></i><p>Imagem indisponível</p>';
         errorDiv.style.cssText = `
             display: flex;
             flex-direction: column;
@@ -35,7 +52,8 @@ window.handleImageError = function(img) {
             justify-content: center;
             height: 100%;
             color: #999;
-            background: #f9f9f9;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            font-size: 0.9rem;
         `;
         container.appendChild(errorDiv);
     }
@@ -60,6 +78,67 @@ const sampleProjects = [
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Page loader functionality
+    const pageLoader = document.getElementById('page-loader');
+    let imagesLoaded = 0;
+    let totalImages = 0;
+    
+    // Hide page loader after content is ready
+    function hidePageLoader() {
+        if (pageLoader) {
+            setTimeout(() => {
+                pageLoader.classList.add('hidden');
+                // Remove from DOM after animation
+                setTimeout(() => {
+                    if (pageLoader.parentNode) {
+                        pageLoader.remove();
+                    }
+                }, 500);
+            }, 800); // Minimum loading time for better UX
+        }
+    }
+    
+    // Count images and track loading
+    function initImageTracking() {
+        const images = document.querySelectorAll('img:not(.loader-logo img)');
+        totalImages = images.length;
+        
+        if (totalImages === 0) {
+            hidePageLoader();
+            return;
+        }
+        
+        images.forEach(img => {
+            if (img.complete && img.naturalHeight !== 0) {
+                imagesLoaded++;
+            } else {
+                img.addEventListener('load', () => {
+                    imagesLoaded++;
+                    if (imagesLoaded >= totalImages) {
+                        hidePageLoader();
+                    }
+                });
+                img.addEventListener('error', () => {
+                    imagesLoaded++;
+                    if (imagesLoaded >= totalImages) {
+                        hidePageLoader();
+                    }
+                });
+            }
+        });
+        
+        // Check if all images are already loaded
+        if (imagesLoaded >= totalImages) {
+            hidePageLoader();
+        }
+        
+        // Fallback: hide loader after 3 seconds regardless
+        setTimeout(hidePageLoader, 3000);
+    }
+    
+    // Initialize image tracking
+    initImageTracking();
+
     // Get base URL for GitHub Pages compatibility
     const baseUrl = getBaseUrl();
     

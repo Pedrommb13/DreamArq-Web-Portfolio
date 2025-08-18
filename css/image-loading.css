@@ -1,20 +1,100 @@
-/* Image loading animations */
+/* Page Loading Overlay */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #faf9f6, #ffffff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.page-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    animation: pulse-fade 2s infinite ease-in-out;
+    transform: scale(1.2);
+}
+
+.loader-logo img {
+    width: 180px;
+    height: auto;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.loader-spinner {
+    margin: 30px 0;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #f0f2f5;
+    border-top: 4px solid #4a90e2;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.loader-text {
+    color: #666;
+    font-size: 1.1rem;
+    margin-top: 25px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse-fade {
+    0%, 100% { 
+        opacity: 0.7; 
+        transform: scale(1.2);
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1.25);
+    }
+}
+
+/* Enhanced Image loading animations */
 .image-container {
     position: relative;
     overflow: hidden;
-    background-color: #f0f0f0;
+    background-color: #f8f9fa;
+    border-radius: 8px;
 }
 
+/* Modern skeleton loading with shimmer effect */
 .image-loading::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
-    width: 50%;
+    width: 100%;
     height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: loading-shine 1.5s infinite;
-    z-index: 1;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+    z-index: 2;
 }
 
 .image-loading::after {
@@ -24,19 +104,29 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #f0f0f0;
-    z-index: 0;
+    background: linear-gradient(90deg, #f0f2f5 25%, #e4e6ea 50%, #f0f2f5 75%);
+    background-size: 200% 100%;
+    animation: skeleton-wave 1.2s infinite ease-in-out;
+    z-index: 1;
 }
 
-/* Optional: Add a subtle pulse animation */
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 0.8; }
-    100% { opacity: 0.6; }
+/* Shimmer animation */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
-.image-loading {
-    animation: pulse 2s infinite ease-in-out;
+/* Skeleton wave animation */
+@keyframes skeleton-wave {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Image fade-in when loaded */
+.image-container img {
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .image-loaded::after,
@@ -44,6 +134,12 @@
     display: none;
 }
 
+.image-loaded img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Remove old animations */
 @keyframes loading-shine {
     to {
         left: 100%;
@@ -52,44 +148,60 @@
 
 /* Enhanced Skeleton Loading */
 .skeleton-loader {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background: linear-gradient(90deg, #f0f2f5 25%, #e4e6ea 50%, #f0f2f5 75%);
     background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite;
-    border-radius: 4px;
+    animation: skeleton-wave 1.2s infinite ease-in-out;
+    border-radius: 6px;
 }
 
-@keyframes skeleton-loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-/* Skeleton for project cards */
+/* Skeleton for project cards with enhanced visual appeal */
 .project-card.loading {
     pointer-events: none;
+    position: relative;
+}
+
+.project-card.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(248, 249, 250, 0.8);
+    z-index: 1;
+    border-radius: 8px;
 }
 
 .project-card.loading .project-info h3,
 .project-card.loading .project-info p {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background: linear-gradient(90deg, #f0f2f5 25%, #e4e6ea 50%, #f0f2f5 75%);
     background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite;
+    animation: skeleton-wave 1.2s infinite ease-in-out;
     color: transparent;
-    border-radius: 4px;
+    border-radius: 6px;
     min-height: 1.2em;
+    position: relative;
+    overflow: hidden;
 }
 
 .project-card.loading .project-info h3 {
-    width: 70%;
-    margin-bottom: 10px;
+    width: 75%;
+    margin-bottom: 12px;
+    height: 1.5em;
 }
 
 .project-card.loading .project-info p {
     width: 90%;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    height: 1em;
+}
+
+.project-card.loading .project-info p:nth-child(3) {
+    width: 85%;
 }
 
 .project-card.loading .project-info p:last-child {
-    width: 60%;
+    width: 65%;
 }
 
 /* Skeleton for carousel */
@@ -119,19 +231,29 @@
 .fade-in-up:nth-child(5) { transition-delay: 0.5s; }
 .fade-in-up:nth-child(6) { transition-delay: 0.6s; }
 
-/* Modifications for project cards */
+/* Modifications for project cards with smooth loading */
+.project-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.project-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .project-card .image-container {
     height: 250px; /* Same as project card img height */
     border-radius: 8px 8px 0 0;
+    background: linear-gradient(90deg, #f0f2f5 25%, #e4e6ea 50%, #f0f2f5 75%);
+    background-size: 200% 100%;
+    animation: skeleton-wave 1.2s infinite ease-in-out;
 }
 
-.project-card .image-container img {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.project-card .image-loaded img {
-    opacity: 1;
+.project-card .image-loaded {
+    background: none;
+    animation: none;
 }
 
 /* Modifications for gallery images */

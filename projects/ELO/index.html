@@ -87,18 +87,21 @@
 
     <script src="../../js/script.js"></script>
     <script>
-        // Performance enhancement functions fallback
+        // Enhanced performance enhancement functions fallback
         function handleImageLoad(img) {
             const container = img.parentNode;
-            container.classList.replace('image-loading', 'image-loaded');
-            img.classList.add('loaded');
+            const carouselSlide = img.closest('.carousel-slide');
             
-            // Add fade-in effect for better UX
-            img.style.opacity = '0';
-            img.style.transition = 'opacity 0.3s ease-in-out';
+            // Add a small delay for smoother transition
             setTimeout(() => {
-                img.style.opacity = '1';
-            }, 50);
+                container.classList.replace('image-loading', 'image-loaded');
+                img.classList.add('loaded');
+                
+                // If it's in a carousel, adjust height
+                if (carouselSlide && window.innerWidth <= 767) {
+                    adjustCarouselHeight(carouselSlide);
+                }
+            }, 100);
         }
         
         function handleImageError(img) {
