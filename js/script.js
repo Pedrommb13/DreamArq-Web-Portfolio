@@ -125,11 +125,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Update progress
                     const progress = (loadedCount / heroImagePaths.length) * 50; // 50% for hero images
                     if (progressFill) progressFill.style.width = `${progress}%`;
-                    if (progressText) progressText.textContent = `Carregando imagens de fundo... (${loadedCount}/${heroImagePaths.length})`;
-                    
+                    if (progressText) progressText.textContent = `Preparando o seu Espaço de Sonho... (${loadedCount}/${heroImagePaths.length})`;
+
                     console.log(`Hero image loaded: ${imagePath}`);
                     if (loadedCount >= heroImagePaths.length) {
-                        if (progressText) progressText.textContent = 'Imagens de fundo carregadas!';
+                        if (progressText) progressText.textContent = 'Temos o seu Espaço de Sonho pronto!';
                         resolve();
                     }
                 };
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     console.warn(`Failed to load hero image: ${imagePath}`);
                     if (loadedCount >= heroImagePaths.length) {
-                        if (progressText) progressText.textContent = 'Imagens de fundo processadas!';
+                        if (progressText) progressText.textContent = 'Temos o seu Espaço de Sonho pronto!';
                         resolve();
                     }
                 };
