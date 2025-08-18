@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     console.log(`Hero image loaded: ${imagePath}`);
                     if (loadedCount >= heroImagePaths.length) {
-                        if (progressText) progressText.textContent = 'Temos o seu Espaço de Sonho pronto!';
+                        if (progressText) progressText.textContent = 'Preparando o seu Espaço de Sonho...';
                         resolve();
                     }
                 };
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     console.warn(`Failed to load hero image: ${imagePath}`);
                     if (loadedCount >= heroImagePaths.length) {
-                        if (progressText) progressText.textContent = 'Temos o seu Espaço de Sonho pronto!';
+                        if (progressText) progressText.textContent = 'Preparando o seu Espaço de Sonho...';
                         resolve();
                     }
                 };
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         imagesLoaded++;
                         updateRegularImageProgress();
                         if (imagesLoaded >= totalImages) {
-                            if (progressText) progressText.textContent = 'Todos os elementos carregados!';
+                            if (progressText) progressText.textContent = 'Preparando o seu Espaço de Sonho...';
                             resolve();
                         }
                     });
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         imagesLoaded++;
                         updateRegularImageProgress();
                         if (imagesLoaded >= totalImages) {
-                            if (progressText) progressText.textContent = 'Carregamento concluído!';
+                            if (progressText) progressText.textContent = 'Preparando o seu Espaço de Sonho...';
                             resolve();
                         }
                     });
