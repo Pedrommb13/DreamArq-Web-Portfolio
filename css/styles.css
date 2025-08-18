@@ -6,13 +6,13 @@
 }
 
 :root {
-    --primary-color: #000000;
+    --primary-color: #111111;
     --secondary-color: #333333;
     --accent-color: #666666;
     --text-color: #000000;
     --text-light: #ffffff;
     --bg-light: #ffffff;
-    --bg-dark: #000000;
+    --bg-dark: #111111;
     --font-main: 'Helvetica Neue', Arial, sans-serif;
     --font-heading: 'Montserrat', sans-serif;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
