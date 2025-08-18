@@ -231,27 +231,29 @@
     position: relative;
     width: 100%;
     overflow: hidden;
+    /* Ensure the wrapper adapts to the image size */
+    display: flex;
+    align-items: center;
 }
 
 .carousel-slides {
     position: relative;
     width: 100%;
+    /* Ensure proper height adaptation */
+    min-height: 200px;
 }
 
 .carousel-slide {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     opacity: 0;
     transition: opacity 0.6s ease-in-out;
 }
 
-.carousel-slide:not(.active) {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 .carousel-slide.active {
+    position: relative;
     opacity: 1;
 }
 
@@ -351,7 +353,13 @@
 /* Responsive carousel */
 @media (max-width: 768px) {
     .carousel-wrapper {
-        height: 300px;
+        /* Remove fixed height to adapt to image size */
+        min-height: 200px;
+    }
+    
+    .carousel-slides {
+        /* Ensure proper adaptation on mobile */
+        min-height: 200px;
     }
     
     .carousel-btn {
@@ -382,7 +390,12 @@
 
 @media (max-width: 480px) {
     .carousel-wrapper {
-        height: 250px;
+        /* Remove fixed height for better mobile adaptation */
+        min-height: 180px;
+    }
+    
+    .carousel-slides {
+        min-height: 180px;
     }
     
     .carousel-caption {
