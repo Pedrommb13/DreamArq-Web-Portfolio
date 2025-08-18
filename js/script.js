@@ -78,10 +78,16 @@ const sampleProjects = [
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Page loader functionality
+    // Enhanced page loader functionality with hero background preloading
     const pageLoader = document.getElementById('page-loader');
     let imagesLoaded = 0;
     let totalImages = 0;
+    let heroImagesLoaded = 0;
+    const heroImagePaths = [
+        'images/hero-bg-1.png',
+        'images/hero-bg-2.png',
+        'images/hero-bg-3.png'
+    ];
     
     // Hide page loader after content is ready
     function hidePageLoader() {
@@ -94,50 +100,152 @@ document.addEventListener('DOMContentLoaded', function() {
                         pageLoader.remove();
                     }
                 }, 500);
-            }, 800); // Minimum loading time for better UX
+            }, 1200); // Slightly longer to ensure smooth transition
         }
     }
     
-    // Count images and track loading
+    // Preload hero background images with progress tracking
+    function preloadHeroImages() {
+        return new Promise((resolve) => {
+            if (heroImagePaths.length === 0) {
+                resolve();
+                return;
+            }
+            
+            let loadedCount = 0;
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            
+            heroImagePaths.forEach((imagePath, index) => {
+                const img = new Image();
+                img.onload = () => {
+                    loadedCount++;
+                    heroImagesLoaded++;
+                    
+                    // Update progress
+                    const progress = (loadedCount / heroImagePaths.length) * 50; // 50% for hero images
+                    if (progressFill) progressFill.style.width = `${progress}%`;
+                    if (progressText) progressText.textContent = `Carregando imagens de fundo... (${loadedCount}/${heroImagePaths.length})`;
+                    
+                    console.log(`Hero image loaded: ${imagePath}`);
+                    if (loadedCount >= heroImagePaths.length) {
+                        if (progressText) progressText.textContent = 'Imagens de fundo carregadas!';
+                        resolve();
+                    }
+                };
+                img.onerror = () => {
+                    loadedCount++;
+                    
+                    // Update progress even on error
+                    const progress = (loadedCount / heroImagePaths.length) * 50;
+                    if (progressFill) progressFill.style.width = `${progress}%`;
+                    
+                    console.warn(`Failed to load hero image: ${imagePath}`);
+                    if (loadedCount >= heroImagePaths.length) {
+                        if (progressText) progressText.textContent = 'Imagens de fundo processadas!';
+                        resolve();
+                    }
+                };
+                img.src = imagePath;
+            });
+        });
+    }
+    
+    // Count regular images and track loading with progress
     function initImageTracking() {
         const images = document.querySelectorAll('img:not(.loader-logo img)');
         totalImages = images.length;
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
         
-        if (totalImages === 0) {
-            hidePageLoader();
-            return;
-        }
-        
-        images.forEach(img => {
-            if (img.complete && img.naturalHeight !== 0) {
-                imagesLoaded++;
-            } else {
-                img.addEventListener('load', () => {
+        const regularImagePromise = new Promise((resolve) => {
+            if (totalImages === 0) {
+                // Complete progress if no regular images
+                if (progressFill) progressFill.style.width = '100%';
+                if (progressText) progressText.textContent = 'Carregamento concluído!';
+                resolve();
+                return;
+            }
+            
+            images.forEach(img => {
+                if (img.complete && img.naturalHeight !== 0) {
                     imagesLoaded++;
-                    if (imagesLoaded >= totalImages) {
-                        hidePageLoader();
-                    }
-                });
-                img.addEventListener('error', () => {
-                    imagesLoaded++;
-                    if (imagesLoaded >= totalImages) {
-                        hidePageLoader();
-                    }
-                });
+                    updateRegularImageProgress();
+                } else {
+                    img.addEventListener('load', () => {
+                        imagesLoaded++;
+                        updateRegularImageProgress();
+                        if (imagesLoaded >= totalImages) {
+                            if (progressText) progressText.textContent = 'Todos os elementos carregados!';
+                            resolve();
+                        }
+                    });
+                    img.addEventListener('error', () => {
+                        imagesLoaded++;
+                        updateRegularImageProgress();
+                        if (imagesLoaded >= totalImages) {
+                            if (progressText) progressText.textContent = 'Carregamento concluído!';
+                            resolve();
+                        }
+                    });
+                }
+            });
+            
+            // Update progress for already loaded images
+            updateRegularImageProgress();
+            
+            // Check if all images are already loaded
+            if (imagesLoaded >= totalImages) {
+                if (progressText) progressText.textContent = 'Todos os elementos carregados!';
+                resolve();
             }
         });
         
-        // Check if all images are already loaded
-        if (imagesLoaded >= totalImages) {
-            hidePageLoader();
+        function updateRegularImageProgress() {
+            const heroProgress = 50; // Hero images take 50%
+            const regularProgress = totalImages > 0 ? (imagesLoaded / totalImages) * 50 : 50; // Regular images take remaining 50%
+            const totalProgress = heroProgress + regularProgress;
+            
+            if (progressFill) progressFill.style.width = `${Math.min(totalProgress, 100)}%`;
+            if (progressText && totalImages > 0) {
+                progressText.textContent = `Carregando elementos... (${imagesLoaded}/${totalImages})`;
+            }
         }
         
-        // Fallback: hide loader after 3 seconds regardless
-        setTimeout(hidePageLoader, 3000);
+        return regularImagePromise;
     }
     
-    // Initialize image tracking
-    initImageTracking();
+    // Wait for both hero images and regular images to load
+    async function initializePageLoading() {
+        try {
+            console.log('Starting page load sequence...');
+            
+            // Wait for both hero images and regular images
+            await Promise.all([
+                preloadHeroImages(),
+                initImageTracking()
+            ]);
+            
+            console.log('All images loaded, hiding loader...');
+            hidePageLoader();
+            
+        } catch (error) {
+            console.error('Error during page loading:', error);
+            // Fallback: hide loader anyway
+            hidePageLoader();
+        }
+    }
+    
+    // Start the loading process
+    initializePageLoading();
+    
+    // Absolute fallback: hide loader after 8 seconds regardless
+    setTimeout(() => {
+        if (pageLoader && !pageLoader.classList.contains('hidden')) {
+            console.log('Fallback: Hiding loader after timeout');
+            hidePageLoader();
+        }
+    }, 8000);
 
     // Get base URL for GitHub Pages compatibility
     const baseUrl = getBaseUrl();

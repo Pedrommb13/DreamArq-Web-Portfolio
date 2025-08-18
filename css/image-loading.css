@@ -55,6 +55,35 @@
     letter-spacing: 0.5px;
 }
 
+.loader-progress {
+    margin-top: 30px;
+    width: 250px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #f0f2f5;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4a90e2, #5ba0f2);
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0;
+    font-weight: 300;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
