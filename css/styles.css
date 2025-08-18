@@ -10,8 +10,8 @@
     --secondary-color: #333333;
     --accent-color: #666666;
     --text-color: #000000;
-    --text-light: #ffffff;
-    --bg-light: #ffffff;
+    --text-light: #faf9f6;
+    --bg-light: #faf9f6;
     --bg-dark: #111111;
     --font-main: 'Helvetica Neue', Arial, sans-serif;
     --font-heading: 'Montserrat', sans-serif;
@@ -23,6 +23,7 @@ body {
     font-family: var(--font-main);
     line-height: 1.6;
     color: var(--text-color);
+    background-color: var(--bg-light);
     overflow-x: hidden;
 }
 
@@ -76,12 +77,13 @@ ul {
 
 section {
     padding: 100px 0;
+    background-color: var(--bg-light);
 }
 
 .btn {
     display: inline-block;
     background-color: var(--secondary-color);
-    color: white;
+    color: #faf9f6;
     padding: 12px 30px;
     border-radius: 4px;
     text-transform: uppercase;
@@ -109,7 +111,7 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: var(--bg-light);
     box-shadow: var(--shadow);
 }
 
@@ -407,6 +409,7 @@ nav {
     border-radius: 4px;
     font-family: inherit;
     font-size: 1rem;
+    background-color: #faf9f6;
 }
 
 .form-group textarea {
@@ -431,7 +434,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #faf9f6;
     margin-right: 1rem;
     font-size: 1.2rem;
 }
@@ -449,7 +452,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #faf9f6;
     margin-right: 1rem;
     font-size: 1.2rem;
     transition: var(--transition);
