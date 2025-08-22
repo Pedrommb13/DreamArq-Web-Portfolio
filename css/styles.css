@@ -427,6 +427,69 @@ nav {
     resize: vertical;
 }
 
+/* Contact Form Card Styles */
+.contact-form-card {
+    background: #faf9f6;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    transition: var(--transition);
+}
+
+.contact-form-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.form-card-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 2rem;
+    color: #faf9f6;
+}
+
+.contact-form-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.contact-form-card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+}
+
+.form-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.form-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-note {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    font-style: italic;
+    margin-bottom: 0 !important;
+}
+
 .contact-info {
     padding-left: 50px;
 }
@@ -612,6 +675,24 @@ footer {
         grid-template-columns: 1fr;
     }
     
+    .contact-info {
+        padding-left: 0;
+    }
+    
+    .contact-form-card {
+        padding: 2rem;
+    }
+    
+    .contact-form-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .form-card-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
     .footer-content {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -640,10 +721,6 @@ footer {
 
     .about-image::before {
         display: none;
-    }
-
-    .contact-info {
-        padding-left: 0;
     }
 
     .hero-content h1 {
